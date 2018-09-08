@@ -9,4 +9,11 @@ class MerchantTest < Minitest::Test
 
     assert_instance_of Merchant, merchant
   end
+
+  def test_if_can_store_attributes
+     merchant = Merchant.new({:id => 5, :name => "Turing School"})
+
+     assert_equal 5, merchant.id
+     assert_equal "Turing School", merchant.name
+  end
 end
