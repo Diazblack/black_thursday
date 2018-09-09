@@ -6,19 +6,19 @@ module Repository
 
   def find_by_id(id_to_find)
     @repository.find do |single_data|
-      @repsitory.id == id_to_find
+      single_data.id == id_to_find
     end
   end
 
   def find_by_name(name_to_find)
     @repository.find do |single_data|
-      @repsitory.name == name_to_find
+      single_data.name.downcase == name_to_find.downcase
     end
   end
 
-  def find_all_by_name(all_name)
-    @repository.find do |single_data|
-      @repsitory.name == name_to_find
+  def find_all_by_name(partial_name)
+    @repository.find_all do |single_data|
+      single_data.name.downcase.start_with?(partial_name.downcase)
     end
   end
 end
