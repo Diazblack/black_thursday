@@ -17,7 +17,6 @@ module Repository
     end
   end
 
-#mierda tengo que ingeniarme como conseguir un valor parcial
   def find_all_by_name(all_name)
     @repository.find do |single_data|
       @repsitory.name == name_to_find
