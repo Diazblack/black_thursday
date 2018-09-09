@@ -1,9 +1,8 @@
 module Repository
 
   def all
-    @repository.each do |single_data|
-      single_data
-    end
+    @repository
+  end
 
   def find_by_id(id_to_find)
     @repository.find do |single_data|

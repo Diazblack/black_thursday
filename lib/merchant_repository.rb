@@ -1,4 +1,4 @@
-require 'CVS'
+require 'CSV'
 require_relative 'merchant'
 require_relative './modules/repository'
 
@@ -13,9 +13,9 @@ class MerchantRepository
   end
 
   def get_merchants(path)
-    CVS.foreach(path, headers: true, header_converters: :symbol) do |row_hash|
+    CSV.foreach(path, headers: true, header_converters: :symbol) do |row_hash|
       @repository << Merchant.new(row_hash)
-    end 
+    end
   end
 
 end

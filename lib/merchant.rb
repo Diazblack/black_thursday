@@ -3,8 +3,8 @@ class Merchant
               :name
 
   def initialize(hash)
-    @id = hash[:id]
+    @id = hash[:id].to_i
     @name = hash[:name]
-    
+
   end
 end
