@@ -5,13 +5,13 @@ require_relative '../lib/item'
 class ItemTest < Minitest::Test
   def test_if_exist
     item = Item.new({
-      :id          => 1,
+      :id          => "1",
       :name        => "Pencil",
       :description => "You can use it to write things",
       :unit_price  => BigDecimal.new(10.99,4),
       :created_at  => Time.now,
       :updated_at  => Time.now,
-      :merchant_id => 2
+      :merchant_id => "2"
     })
 
     assert_instance_of Item, item
@@ -19,13 +19,13 @@ class ItemTest < Minitest::Test
 
   def test_if_can_store_attributes
     item = Item.new({
-      :id          => 1,
+      :id          => "1",
       :name        => "Pencil",
       :description => "You can use it to write things",
       :unit_price  => BigDecimal.new(10.99,4),
       :created_at  => Time.now,
       :updated_at  => Time.now,
-      :merchant_id => 2
+      :merchant_id => "2"
     })
 
      assert_equal 1, item.id
@@ -39,13 +39,13 @@ class ItemTest < Minitest::Test
 
    def test_if_it_can_get_price_on_dollars
     item = Item.new({
-      :id          => 1,
+      :id          => "1",
       :name        => "Pencil",
       :description => "You can use it to write things",
       :unit_price  => BigDecimal.new(10.99,4),
       :created_at  => Time.now,
       :updated_at  => Time.now,
-      :merchant_id => 2
+      :merchant_id => "2"
     })
 
      assert_equal 10.99, item.unit_price_to_dollars
