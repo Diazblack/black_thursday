@@ -6,14 +6,14 @@ require_relative '../lib/modules/repository'
 
 class MerchantRepositoryTest < Minitest::Test
   def test_if_exist
-    merchant_storage = MerchantRepository.new("./data/test_data/merchants.cvs")
+    merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
 
     assert_instance_of MerchantRepository,
     merchant_storage
   end
 
   def test_if_it_can_get_merchants
-    merchant_storage = MerchantRepository.new("./data/test_data/merchants.cvs")
+    merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
 
     assert_equal 10, merchant_storage.all.length
     assert_instance_of Array, merchant_storage.all
@@ -22,7 +22,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_if_it_can_get_merchants_by_id
-    merchant_storage = MerchantRepository.new("./data/test_data/merchants.cvs")
+    merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
 
     merchant = merchant_storage.find_by_id(12334132)
 
@@ -31,7 +31,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_if_wrong_id_returns_nil
-    merchant_storage = MerchantRepository.new("./data/test_data/merchants.cvs")
+    merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
 
     merchant = merchant_storage.find_by_id(8882783723)
 
@@ -39,7 +39,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_if_it_can_find_name_and_return_nil_for_wrong_name
-    merchant_storage = MerchantRepository.new("./data/test_data/merchants.cvs")
+    merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
 
     merchant_1 = merchant_storage.find_by_name("LolaMarleys")
 
@@ -51,7 +51,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_if_it_can_find_by_name_and_return_nil_for_wrong_name
-    merchant_storage = MerchantRepository.new("./data/test_data/merchants.cvs")
+    merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
 
     merchant_1 = merchant_storage.find_by_name("LolaMarleys")
 
@@ -63,7 +63,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_if_it_can_find_all_by_name_and_return_empty_array_for_wrong_name
-    merchant_storage = MerchantRepository.new("./data/test_data/merchants.cvs")
+    merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
 
     merchant_1 = merchant_storage.find_all_by_name("PERL")
 
@@ -77,7 +77,21 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_if_it_can_create_a_new_merchant
-    merchant_storage = MerchantRepository.new("./data/test_data/merchants.cvs")
+    merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
+    attributes = {
+      name: "Turing School of Software and Design"
+    }
+
+    merchant_storage.create(attributes)
+
+    assert_equal 12334146,
+    merchant_storage.repository.last.id
+    assert_equal "Turing School of Software and Design",
+    merchant_storage.repository.last.name
+  end
+
+  def test_if_it_can_create_a_new_merchant_and_delete_two_merchants_by_id
+    merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
     attributes = {
       name: "Turing School of Software and Design"
     }
@@ -89,5 +103,25 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal "Turing School of Software and Design",
     merchant_storage.repository.last.name
 
+
+    merchant_storage.delete(12334146)
+
+    assert_nil merchant_storage.find_by_id(12334146)
+
+    merchant_storage.delete(12334115)
+
+    assert_nil merchant_storage.find_by_id(12334115)
+  end
+
+  def test_if_it_can_update_name_but_not_id
+    merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
+    id = 12334113
+    name = "El Pollo Hermanos"
+    merchant = merchant_storage.update(id, name)
+
+    assert_equal 12334113,
+    merchant_storage.find(id).id
+    assert_equal "El Pollo Hermanos",
+    merchant_storage.find_by_id.name
   end
 end

@@ -24,4 +24,5 @@ class MerchantRepository
     hash[:id] = new_id
     @repository << Merchant.new(hash)
   end
+  
 end

@@ -1,4 +1,3 @@
-
 module Repository
 
   def all
@@ -21,6 +20,10 @@ module Repository
     @repository.find_all do |single_data|
       single_data.name.downcase.start_with?(partial_name.downcase)
     end
+  end
+
+  def delete(id)
+    @repository.delete(find_by_id(id))
   end
 
   def get_date
