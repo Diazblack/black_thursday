@@ -35,9 +35,9 @@ class ItemTest < Minitest::Test
      assert_instance_of Time , item.created_at
      assert_instance_of Time , item.updated_at
      assert_equal 2, item.merchant_id
-   end
+  end
 
-   def test_if_it_can_get_price_on_dollars
+  def test_if_it_can_get_price_on_dollars
     item = Item.new({
       :id          => "1",
       :name        => "Pencil",
@@ -48,6 +48,6 @@ class ItemTest < Minitest::Test
       :merchant_id => "2"
     })
 
-     assert_equal 10.99, item.unit_price_to_dollars
-   end
+    assert_equal 10.99, item.unit_price_to_dollars
+  end
 end
