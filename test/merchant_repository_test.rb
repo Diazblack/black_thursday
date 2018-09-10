@@ -67,14 +67,27 @@ class MerchantRepositoryTest < Minitest::Test
 
     merchant_1 = merchant_storage.find_all_by_name("PERL")
 
-    assert_equal 2, merchant_1.length#comparing the id to get the right merchant
+    assert_equal 2, merchant_1.length
     assert_equal "perlesemoi", merchant_1[0].name
     assert_equal "Perladelmar",merchant_1[1].name
-    
+
     merchant_2 = merchant_storage.find_all_by_name("Naruto")
 
     assert_equal [], merchant_2
-
   end
 
+  def test_if_it_can_create_a_new_merchant
+    merchant_storage = MerchantRepository.new("./data/test_data/merchants.cvs")
+    attributes = {
+      name: "Turing School of Software and Design"
+    }
+
+    merchant_storage.create(attributes)
+
+    assert_equal 12334146,
+    merchant_storage.repository.last.id
+    assert_equal "Turing School of Software and Design",
+    merchant_storage.repository.last.name
+
+  end
 end

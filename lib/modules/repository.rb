@@ -1,3 +1,4 @@
+
 module Repository
 
   def all
@@ -20,5 +21,9 @@ module Repository
     @repository.find_all do |single_data|
       single_data.name.downcase.start_with?(partial_name.downcase)
     end
+  end
+
+  def get_date
+    Date.today.strftime("%Y-%m-%d")
   end
 end

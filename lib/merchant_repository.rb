@@ -1,4 +1,5 @@
 require 'CSV'
+require 'Date'
 require_relative 'merchant'
 require_relative './modules/repository'
 
@@ -18,4 +19,9 @@ class MerchantRepository
     end
   end
 
+  def create(hash)
+    new_id = @repository.last.id + 1
+    hash[:id] = new_id
+    @repository << Merchant.new(hash)
+  end
 end
