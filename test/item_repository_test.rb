@@ -41,4 +41,29 @@ class ItemRepositoryTest < Minitest::Test
     item_2 = items_storage.find_by_name("Kakarroto")
     assert_nil item_2
   end
+
+  def test_if_it_can_create_a_new_item_and_delete_other
+    items_storage = ItemRepository.new("./data/test_data/items.csv")
+    attributes = {
+      :name        => "Pencil",
+      :description => "You can use it to write things",
+      :unit_price  => 10.99,
+      :created_at  => Time.now,
+      :updated_at  => Time.now,
+      :merchant_id => "2"
+    }
+
+    items_storage.create(attributes)
+    assert_equal 263396210, items_storage.repository.last.id
+    assert_equal "Pencil" , items_storage.repository.last.name
+    assert_instance_of BigDecimal, items_storage.repository.last.unit_price
+    assert_instance_of Time, items_storage.repository.last.created_at
+    assert_instance_of Time, items_storage.repository.last.updated_at
+    assert_equal 2, items_storage.repository.last.merchant_id
+
+    item_2 = items_storage.delete(263395721)
+
+    assert_nil items_storage.find_by_id(263395721)
+  end
+
 end

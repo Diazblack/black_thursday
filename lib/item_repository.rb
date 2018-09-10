@@ -13,4 +13,8 @@ class ItemRepository
     get_stuff(path, @class)
   end
 
+  def create(hash)
+    create_stuff(hash, @class)
+  end
+  
 end
