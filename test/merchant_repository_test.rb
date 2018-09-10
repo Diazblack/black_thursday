@@ -17,7 +17,9 @@ class MerchantRepositoryTest < Minitest::Test
 
     assert_equal 10, merchant_storage.all.length
     assert_instance_of Array, merchant_storage.all
-    assert_instance_of Merchant, merchant_storage.all.first
+     merchant_storage.all.each do |merchant|
+       assert_instance_of Merchant, merchant
+     end 
     assert_equal "Shopin1901", merchant_storage.all.first.name
   end
 
@@ -116,7 +118,7 @@ class MerchantRepositoryTest < Minitest::Test
   def test_if_it_can_update_name_but_not_id
     merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
     id = 12334113
-    attributes = { name: "Los Pollos Hermanos" }
+    attributes = { name: "Los Pollos Hermanos", id: 12345678}
     merchant = merchant_storage.update(id, attributes)
 
     assert_equal 12334113,

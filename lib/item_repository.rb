@@ -1,3 +1,4 @@
+require 'CSV'
 require_relative 'item'
 require_relative './modules/repository'
 
@@ -6,8 +7,10 @@ class ItemRepository
 
   attr_reader :repository
 
-  def initialize
+  def initialize(path)
     @repository = []
+    @class = Item
+    get_stuff(path, @class)
   end
 
 end

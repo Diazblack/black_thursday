@@ -1,3 +1,5 @@
+require 'bigdecimal'
+require 'bigdecimal/util'
 class Item
   attr_reader :id,
               :name,
@@ -11,7 +13,7 @@ class Item
     @id = hash[:id].to_i
     @name = hash[:name]
     @description = hash[:description]
-    @unit_price = hash[:unit_price]
+    @unit_price = hash[:unit_price].to_d
     @created_at = hash[:created_at]
     @updated_at = hash[:updated_at]
     @merchant_id = hash[:merchant_id].to_i

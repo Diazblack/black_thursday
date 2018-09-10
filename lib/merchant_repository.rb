@@ -10,19 +10,12 @@ class MerchantRepository
 
   def initialize(path)
     @repository = []
-    get_merchants(path)
-  end
-
-  def get_merchants(path)
-    CSV.foreach(path, headers: true, header_converters: :symbol) do |row_hash|
-      @repository << Merchant.new(row_hash)
-    end
+    @class = Merchant
+    get_stuff(path, @class)
   end
 
   def create(hash)
-    new_id = @repository.last.id + 1
-    hash[:id] = new_id
-    @repository << Merchant.new(hash)
+    create_stuff(hash, @class)
   end
-  
+
 end

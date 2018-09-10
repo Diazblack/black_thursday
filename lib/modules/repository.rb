@@ -1,5 +1,11 @@
 module Repository
 
+  def get_stuff(path, object_class)
+    CSV.foreach(path, headers: true, header_converters: :symbol) do |row_hash|
+      @repository << object_class.new(row_hash)
+    end
+  end
+
   def all
     @repository
   end
@@ -20,6 +26,12 @@ module Repository
     @repository.find_all do |single_data|
       single_data.name.downcase.start_with?(partial_name.downcase)
     end
+  end
+
+  def create_stuff(hash, object_class)
+    new_id = @repository.last.id + 1
+    hash[:id] = new_id
+    @repository << object_class.new(hash)
   end
 
   def delete(id)
