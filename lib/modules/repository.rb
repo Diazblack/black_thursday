@@ -26,6 +26,11 @@ module Repository
     @repository.delete(find_by_id(id))
   end
 
+  def update(id_to_find, hash)
+    single_data = find_by_id(id_to_find)
+    single_data.change_attributes(hash)
+  end
+
   def get_date
     Date.today.strftime("%Y-%m-%d")
   end

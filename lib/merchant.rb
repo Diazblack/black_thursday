@@ -7,4 +7,8 @@ class Merchant
     @name = hash[:name]
 
   end
+
+  def change_attributes(attributes)
+    @name = attributes[:name]
+  end
 end

@@ -116,12 +116,12 @@ class MerchantRepositoryTest < Minitest::Test
   def test_if_it_can_update_name_but_not_id
     merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
     id = 12334113
-    name = "El Pollo Hermanos"
-    merchant = merchant_storage.update(id, name)
+    attributes = { name: "Los Pollos Hermanos" }
+    merchant = merchant_storage.update(id, attributes)
 
     assert_equal 12334113,
-    merchant_storage.find(id).id
-    assert_equal "El Pollo Hermanos",
-    merchant_storage.find_by_id.name
+    merchant_storage.find_by_id(id).id
+    assert_equal "Los Pollos Hermanos",
+    merchant_storage.find_by_id(id).name
   end
 end
