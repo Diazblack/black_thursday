@@ -1,5 +1,11 @@
 module Repository
 
+  def get_stuff(path, object_class)
+    CSV.foreach(path, headers: true, header_converters: :symbol) do |row_hash|
+      @repository << object_class.new(row_hash)
+    end
+  end
+
   def all
     @repository
   end
@@ -22,6 +28,12 @@ module Repository
     end
   end
 
+  def create_stuff(hash, object_class)
+    new_id = @repository.last.id + 1
+    hash[:id] = new_id
+    @repository << object_class.new(hash)
+  end
+
   def delete(id)
     @repository.delete(find_by_id(id))
   end
@@ -31,7 +43,7 @@ module Repository
     single_data.change_attributes(hash)
   end
 
-  def get_date
-    Date.today.strftime("%Y-%m-%d")
-  end
+  # def get_date
+  #   Date.today.strftime("%Y-%m-%d")
+  # end
 end

@@ -35,9 +35,25 @@ class ItemTest < Minitest::Test
      assert_instance_of Time , item.created_at
      assert_instance_of Time , item.updated_at
      assert_equal 2, item.merchant_id
-   end
+  end
 
-   def test_if_it_can_get_price_on_dollars
+  def test_if_it_can_transform_in_a_big_decimal_if_it_isnt_
+    item = Item.new({
+      :id          => "1",
+      :name        => "Pencil",
+      :description => "You can use it to write things",
+      :unit_price  => "1099",
+      :created_at  => Time.now,
+      :updated_at  => Time.now,
+      :merchant_id => "2"
+    })
+
+    assert_instance_of BigDecimal, item.unit_price
+    assert_equal 10.99, item.unit_price_to_dollars
+
+  end
+
+  def test_if_it_can_get_price_on_dollars
     item = Item.new({
       :id          => "1",
       :name        => "Pencil",
@@ -48,6 +64,7 @@ class ItemTest < Minitest::Test
       :merchant_id => "2"
     })
 
-     assert_equal 10.99, item.unit_price_to_dollars
-   end
+    assert_equal 10.99, item.unit_price_to_dollars
+  end
+
 end
