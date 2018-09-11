@@ -12,6 +12,15 @@ class SalesEngine
   end
 
   def self.from_csv(hash)
+    classes = {
+      items: ItemRepository,
+      merchants: MerchantRepository
+    }
 
+    new_hash = Hash.new(0)
+    hash.each_pair do |key, path|
+      new_hash[key] = classes[key].new(path)
+    end
+    self.new(new_hash)
   end
 end

@@ -20,8 +20,7 @@ class SalesEngineTest < Minitest::Test
       :items     => "./data/test_data/items.csv",
       :merchants => "./data/test_data/merchants.csv",
     }
-
-    se.from_csv(hash)
+    se = SalesEngine.from_csv(hash)
 
     # Item repository assertions
     assert_equal 5, se.items.all.length
@@ -32,11 +31,11 @@ class SalesEngineTest < Minitest::Test
     assert_equal "510+ RealPush Icon Set", se.items.all.first.name
 
     # Merchant repository assertions
-    assert_equal 10, semerchants.all.length
-    assert_instance_of Array, semerchants.all
-     semerchants.all.each do |merchant|
+    assert_equal 10, se.merchants.all.length
+    assert_instance_of Array, se.merchants.all
+     se.merchants.all.each do |merchant|
        assert_instance_of Merchant, merchant
      end
-    assert_equal "Shopin1901", semerchants.all.first.name
+    assert_equal "Shopin1901", se.merchants.all.first.name
   end
 end
