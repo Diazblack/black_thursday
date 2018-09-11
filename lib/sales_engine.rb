@@ -19,7 +19,9 @@ class SalesEngine
 
     new_hash = Hash.new(0)
     hash.each_pair do |key, path|
-      new_hash[key] = classes[key].new(path)
+      if classes[key] != nil
+        new_hash[key] = classes[key].new(path)
+      end
     end
     self.new(new_hash)
   end

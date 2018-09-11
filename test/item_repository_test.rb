@@ -129,12 +129,12 @@ class ItemRepositoryTest < Minitest::Test
   def test_if_it_can_find_all_by_price_with_range_and_retun_empty_array_if_doesnt
     items_storage = ItemRepository.new("./data/test_data/items.csv")
 
-    items = items_storage.find_all_by_price_with_range(10.00..15.00)
+    items = items_storage.find_all_by_price_in_range(10.00..15.00)
 
     expected = [items_storage.repository[0], items_storage.repository[1], items_storage.repository[2]]
     assert_equal expected, items
 
-    items_2 = items_storage.find_all_by_price_with_range(100_000_000.00..150_000_000.00)
+    items_2 = items_storage.find_all_by_price_in_range(100_000_000.00..150_000_000.00)
 
     assert_equal [], items_2
   end

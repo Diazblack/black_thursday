@@ -53,6 +53,22 @@ class ItemTest < Minitest::Test
 
   end
 
+  def test_if_it_can_transform_strings_in_Time_objects
+    item = Item.new({
+      :id          => "1",
+      :name        => "Pencil",
+      :description => "You can use it to write things",
+      :unit_price  => "1099",
+      :created_at  => "2002-01-01 00:00:00 -0500",
+      :updated_at  => "2002-01-01 00:00:00 -0500",
+      :merchant_id => "2"
+    })
+
+    assert_instance_of Time, item.created_at
+    assert_instance_of Time, item.updated_at
+
+  end
+
   def test_if_it_can_get_price_on_dollars
     item = Item.new({
       :id          => "1",

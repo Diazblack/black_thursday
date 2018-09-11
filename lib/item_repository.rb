@@ -1,6 +1,7 @@
 require_relative 'item'
 require_relative './modules/repository'
 require_relative './modules/csv_adapter'
+require 'Time'
 
 class ItemRepository
   include Repository
@@ -12,6 +13,10 @@ class ItemRepository
     @repository = []
     @class = Item
     get_stuff(path, @class)
+  end
+
+  def inspect
+    "#<#{self.class} #{@repository.size} rows>"
   end
 
   def create(hash)
@@ -36,7 +41,7 @@ class ItemRepository
     end
   end
 
-  def find_all_by_price_with_range(range)
+  def find_all_by_price_in_range(range)
     @repository.find_all do |item|
       range.include?(item.unit_price)
     end
