@@ -1,6 +1,6 @@
 require 'CSV'
 
-module CSVAdaptor
+module CSVAdapter
 
   def get_stuff(path, object_class)
     CSV.foreach(path, headers: true, header_converters: :symbol) do |row_hash|

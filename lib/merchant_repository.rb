@@ -1,11 +1,11 @@
 require_relative 'merchant'
 require_relative './modules/repository'
-require_relative './modules/csv_adaptor'
+require_relative './modules/csv_adapter'
 
 class MerchantRepository
   include Repository
-  include CSVAdaptor
-  
+  include CSVAdapter
+
   attr_reader :repository
 
   def initialize(path)
