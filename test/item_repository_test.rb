@@ -101,14 +101,28 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_if_it_can_find_all_with_mechant_id_and_retun_empty_array_if_doesnt
-    skip
     items_storage = ItemRepository.new("./data/test_data/items.csv")
 
     items = items_storage.find_all_by_merchant_id(12334185)
-    expected = [items_storage.repository[1], items_storage.repository[2], items_storage.repository[1]]
+
+    expected = [items_storage.repository[1], items_storage.repository[2], items_storage.repository[3]]
     assert_equal expected, items
 
-    items_2 = items_storage.find_all_with_description("Minato")
+    items_2 = items_storage.find_all_by_merchant_id(23647326548723645)
+
+    assert_equal [], items_2
+  end
+
+  def test_if_it_can_find_all_by_price_and_retun_empty_array_if_doesnt
+  skip
+    items_storage = ItemRepository.new("./data/test_data/items.csv")
+
+    items = items_storage.find_all_by_price()
+
+    expected = [items_storage.repository[1], items_storage.repository[2], items_storage.repository[3]]
+    assert_equal expected, items
+
+    items_2 = items_storage.find_all_by_merchant_id(23647326548723645)
 
     assert_equal [], items_2
   end

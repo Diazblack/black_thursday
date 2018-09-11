@@ -22,4 +22,11 @@ class ItemRepository
       item.description.downcase.include?(words.downcase)
     end
   end
+
+  def find_all_by_merchant_id(id)
+    @repository.find_all do |item|
+      item.merchant_id == id
+    end
+  end
+
 end

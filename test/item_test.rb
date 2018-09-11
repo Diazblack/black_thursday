@@ -8,7 +8,7 @@ class ItemTest < Minitest::Test
       :id          => "1",
       :name        => "Pencil",
       :description => "You can use it to write things",
-      :unit_price  => 10.99,
+      :unit_price  => BigDecimal.new(10.99,4),
       :created_at  => Time.now,
       :updated_at  => Time.now,
       :merchant_id => "2"
@@ -22,7 +22,7 @@ class ItemTest < Minitest::Test
       :id          => "1",
       :name        => "Pencil",
       :description => "You can use it to write things",
-      :unit_price  => 10.99,
+      :unit_price  => BigDecimal.new(10.99,4),
       :created_at  => Time.now,
       :updated_at  => Time.now,
       :merchant_id => "2"
@@ -37,12 +37,28 @@ class ItemTest < Minitest::Test
      assert_equal 2, item.merchant_id
   end
 
+  def test_if_it_can_transform_in_a_big_decimal_if_it_isnt_
+    item = Item.new({
+      :id          => "1",
+      :name        => "Pencil",
+      :description => "You can use it to write things",
+      :unit_price  => "1099",
+      :created_at  => Time.now,
+      :updated_at  => Time.now,
+      :merchant_id => "2"
+    })
+
+    assert_instance_of BigDecimal, item.unit_price
+    assert_equal 10.99, item.unit_price_to_dollars
+
+  end
+
   def test_if_it_can_get_price_on_dollars
     item = Item.new({
       :id          => "1",
       :name        => "Pencil",
       :description => "You can use it to write things",
-      :unit_price  => 10.99,
+      :unit_price  => BigDecimal.new(10.99,4),
       :created_at  => Time.now,
       :updated_at  => Time.now,
       :merchant_id => "2"
