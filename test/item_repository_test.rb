@@ -87,4 +87,29 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 10.99, item.unit_price_to_dollars
     assert_equal 12334185, item.merchant_id
   end
+
+  def test_if_it_can_find_all_with_description_and_retun_empty_array_if_doesnt
+    items_storage = ItemRepository.new("./data/test_data/items.csv")
+
+    items = items_storage.find_all_with_description("frames")
+    expected = [items_storage.repository[1], items_storage.repository[2]]
+    assert_equal expected, items
+
+    items_2 = items_storage.find_all_with_description("Minato")
+
+    assert_equal [], items_2
+  end
+
+  def test_if_it_can_find_all_with_mechant_id_and_retun_empty_array_if_doesnt
+    skip
+    items_storage = ItemRepository.new("./data/test_data/items.csv")
+
+    items = items_storage.find_all_by_merchant_id(12334185)
+    expected = [items_storage.repository[1], items_storage.repository[2], items_storage.repository[1]]
+    assert_equal expected, items
+
+    items_2 = items_storage.find_all_with_description("Minato")
+
+    assert_equal [], items_2
+  end
 end

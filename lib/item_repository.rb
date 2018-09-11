@@ -16,5 +16,10 @@ class ItemRepository
   def create(hash)
     create_stuff(hash, @class)
   end
-  
+
+  def find_all_with_description(words)
+    @repository.find_all do |item|
+      item.description.downcase.include?(words.downcase)
+    end
+  end
 end
