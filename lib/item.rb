@@ -24,6 +24,7 @@ class Item
     @name = attributes[:name]
     @description = attributes[:description]
     @unit_price = attributes[:unit_price]
+    @updated_at = Time.now
   end
 
   def unit_price_to_dollars
