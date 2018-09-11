@@ -1,5 +1,6 @@
 require 'bigdecimal'
 require 'bigdecimal/util'
+require 'Time'
 class Item
   attr_reader :id,
               :name,
@@ -14,8 +15,8 @@ class Item
     @name = hash[:name]
     @description = hash[:description]
     @unit_price = transform_to_big_decimal(hash[:unit_price])
-    @created_at = hash[:created_at]
-    @updated_at = hash[:updated_at]
+    @created_at = transform_to_time(hash[:created_at])
+    @updated_at = transform_to_time(hash[:updated_at])
     @merchant_id = hash[:merchant_id].to_i
 
   end
@@ -35,6 +36,14 @@ class Item
     if data.class != BigDecimal
       string = data.insert( - 3, ".")
       BigDecimal.new(string)
+    else
+      data
+    end
+  end
+
+  def transform_to_time(data)
+    if data.class != Time
+      Time.parse(data)
     else
       data
     end

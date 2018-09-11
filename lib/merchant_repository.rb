@@ -14,6 +14,10 @@ class MerchantRepository
     get_stuff(path, @class)
   end
 
+  def inspect
+    "#<#{self.class} #{@repository.size} rows>"
+  end
+
   def create(hash)
     create_stuff(hash, @class)
   end

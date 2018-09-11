@@ -19,7 +19,7 @@ module Repository
 
   def find_all_by_name(partial_name)
     @repository.find_all do |single_data|
-      single_data.name.downcase.start_with?(partial_name.downcase)
+      single_data.name.downcase.include?(partial_name.downcase)
     end
   end
 
@@ -34,8 +34,9 @@ module Repository
   end
 
   def update(id_to_find, hash)
+
     single_data = find_by_id(id_to_find)
-    single_data.change_attributes(hash)
+    single_data.change_attributes(hash) if single_data
   end
 
   # def get_date
