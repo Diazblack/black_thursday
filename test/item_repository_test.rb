@@ -66,4 +66,25 @@ class ItemRepositoryTest < Minitest::Test
     assert_nil items_storage.find_by_id(263395721)
   end
 
+  def test_if_it_can_update_an_item_by_only_modifying_3_attributes
+    items_storage = ItemRepository.new("./data/test_data/items.csv")
+    attributes = {
+      :id          => 1111,
+      :name        => "Pencil",
+      :description => "You can use it to write things",
+      :unit_price  => 10.99,
+      :created_at  => Time.now,
+      :updated_at  => Time.now,
+      :merchant_id => "2"
+    }
+    id = 263395617
+
+    items_storage.update(id, attributes)
+    item = items_storage.find_by_name("pencil")
+
+    assert_equal 263395617, item.id
+    assert_equal "Pencil" , item.name
+    assert_equal 10.99, item.unit_price_to_dollars
+    assert_equal 12334185, item.merchant_id
+  end
 end

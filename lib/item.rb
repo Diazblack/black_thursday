@@ -20,6 +20,12 @@ class Item
 
   end
 
+  def change_attributes(attributes)
+    @name = attributes[:name]
+    @description = attributes[:description]
+    @unit_price = attributes[:unit_price].to_d
+  end
+
   def unit_price_to_dollars
     @unit_price.to_f.round(2)
   end
