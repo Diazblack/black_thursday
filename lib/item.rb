@@ -32,7 +32,7 @@ class Item
 
   def transfor_to_big_decimal(data)
     if data.class != BigDecimal
-      string = data.insert( -3, ".")
+      string = data.insert( - 3, ".")
       BigDecimal.new(string)
     else
       data

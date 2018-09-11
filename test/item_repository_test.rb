@@ -47,7 +47,7 @@ class ItemRepositoryTest < Minitest::Test
     attributes = {
       :name        => "Pencil",
       :description => "You can use it to write things",
-      :unit_price  => 10.99,
+      :unit_price  => BigDecimal(10.99,4),
       :created_at  => Time.now,
       :updated_at  => Time.now,
       :merchant_id => "2"
@@ -114,15 +114,27 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_if_it_can_find_all_by_price_and_retun_empty_array_if_doesnt
-  skip
     items_storage = ItemRepository.new("./data/test_data/items.csv")
 
-    items = items_storage.find_all_by_price()
+    items = items_storage.find_all_by_price(12.00)
 
-    expected = [items_storage.repository[1], items_storage.repository[2], items_storage.repository[3]]
+    expected = [items_storage.repository[0]]
     assert_equal expected, items
 
-    items_2 = items_storage.find_all_by_merchant_id(23647326548723645)
+    items_2 = items_storage.find_all_by_price(120000.00)
+
+    assert_equal [], items_2
+  end
+
+  def test_if_it_can_find_all_by_price_with_range_and_retun_empty_array_if_doesnt
+    items_storage = ItemRepository.new("./data/test_data/items.csv")
+
+    items = items_storage.find_all_by_price_with_range(10.00..15.00)
+
+    expected = [items_storage.repository[0], items_storage.repository[1], items_storage.repository[2]]
+    assert_equal expected, items
+
+    items_2 = items_storage.find_all_by_price_with_range(100_000_000.00..150_000_000.00)
 
     assert_equal [], items_2
   end
