@@ -37,7 +37,7 @@ class ItemTest < Minitest::Test
      assert_equal 2, item.merchant_id
   end
 
-  def test_if_it_can_transform_in_a_big_decimal_if_it_isnt_
+  def test_if_it_can_transform_in_a_big_decimal_if_it_isnt
     item = Item.new({
       :id          => "1",
       :name        => "Pencil",

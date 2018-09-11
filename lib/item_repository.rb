@@ -1,9 +1,10 @@
-require 'CSV'
 require_relative 'item'
 require_relative './modules/repository'
+require_relative './modules/csv_adaptor'
 
 class ItemRepository
   include Repository
+  include CSVAdaptor
 
   attr_reader :repository
 
