@@ -38,8 +38,4 @@ module Repository
     single_data = find_by_id(id_to_find)
     single_data.change_attributes(hash) if single_data
   end
-
-  # def get_date
-  #   Date.today.strftime("%Y-%m-%d")
-  # end
 end
