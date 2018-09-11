@@ -61,7 +61,7 @@ class ItemRepositoryTest < Minitest::Test
     assert_instance_of Time, items_storage.repository.last.updated_at
     assert_equal 2, items_storage.repository.last.merchant_id
 
-    item_2 = items_storage.delete(263395721)
+    items_storage.delete(263395721)
 
     assert_nil items_storage.find_by_id(263395721)
   end

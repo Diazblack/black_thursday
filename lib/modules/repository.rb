@@ -43,7 +43,7 @@ module Repository
     single_data.change_attributes(hash)
   end
 
-  def get_date
-    Date.today.strftime("%Y-%m-%d")
-  end
+  # def get_date
+  #   Date.today.strftime("%Y-%m-%d")
+  # end
 end

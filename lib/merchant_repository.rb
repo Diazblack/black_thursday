@@ -1,5 +1,4 @@
 require 'CSV'
-require 'Date'
 require_relative 'merchant'
 require_relative './modules/repository'
 
