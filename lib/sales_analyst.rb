@@ -15,4 +15,14 @@ class SalesAnalyst
     average_number(sum_of_items, merchants_length)
   end
 
+  def average_items_per_merchant_standart_deviation
+    array_of_items = @engine.number_of_items_by_merchant
+    sum_all_integers = sum_of_integers(array_of_items)
+    average = average_items_per_merchant
+    subtract = subtract_index(array_of_items, average)
+    sum_square_numbers = sum_of_integers(square_numbers(subtract))
+    standart = sum_square_numbers / array_of_items.length
+    Math.sqrt(standart).round(2)
+  end
+
 end

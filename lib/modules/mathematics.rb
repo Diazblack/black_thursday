@@ -48,7 +48,7 @@ module Mathematics
 
   def square_numbers(array)
     array.map do |square|
-      square_number << (square ** 2).round(2)
+      (square ** 2).round(2)
     end
   end
 end
