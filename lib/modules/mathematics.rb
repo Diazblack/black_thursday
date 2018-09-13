@@ -31,8 +31,8 @@ module Mathematics
   end
 
   def sum_of_integers(array)
-    array.sum do |number|
-      number
+    array.inject(0) do |sum, item|
+      sum += item
     end
   end
 
