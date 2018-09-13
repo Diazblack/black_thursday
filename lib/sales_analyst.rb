@@ -25,4 +25,8 @@ class SalesAnalyst
     Math.sqrt(standart).round(2)
   end
 
+  def merchants_with_high_item_count
+    
+  end
+
 end
