@@ -48,6 +48,16 @@ class SalesEngineTest < Minitest::Test
 
     expected = [1,0,0,0,0,0,0,1,0,0,3]
     assert_equal expected, se.number_of_items_by_merchant
+  end
 
+  def test_if_it_can_an_hash_with_the_amount_of_item_by_sold_by_merchant_id_greater_then_cero
+    hash = {
+      :items     => "./data/test_data/items.csv",
+      :merchants => "./data/test_data/merchants.csv",
+    }
+    se = SalesEngine.from_csv(hash)
+
+    expected = {12334141 => 1, 12334105 => 1, 12334185 => 3}
+    assert_equal expected, se.hash_of_items_number_by_merchant_id
   end
 end

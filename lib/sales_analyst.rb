@@ -26,7 +26,10 @@ class SalesAnalyst
   end
 
   def merchants_with_high_item_count
-    
+    standart_deviation = average_items_per_merchant_standart_deviation
+    @engine.hash_of_items_number_by_merchant_id.inject([]) do |array, (key, value)|
+      array << engine.merchants.find_by_id(key) if value > standart_deviation
+    end
   end
 
 end

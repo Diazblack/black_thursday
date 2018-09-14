@@ -32,4 +32,12 @@ class SalesEngine
       items.length
     end
   end
+
+  def hash_of_items_number_by_merchant_id
+    @merchants.repository. inject({}) do |hash, merchant|
+      item = @items.find_all_by_merchant_id(merchant.id)
+      hash[merchant.id] = item.length if item.length > 0
+      hash
+    end
+  end
 end
