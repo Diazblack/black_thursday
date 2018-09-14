@@ -5,9 +5,11 @@ require "bigdecimal/util"
 module Mathematics
 
   def transform_to_big_decimal(data)
-    if data.class != BigDecimal
+    if data.class != BigDecimal && data.class != Float
       string = data.insert( - 3, ".")
       BigDecimal.new(string)
+    elsif data.class == Float
+      data.to_d
     else
       data
     end

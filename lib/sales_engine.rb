@@ -33,6 +33,13 @@ class SalesEngine
     end
   end
 
+  def price_of_items_by_merchant(id)
+      items = @items.find_all_by_merchant_id(id)
+      items.map do |item|
+        item.unit_price
+      end 
+  end
+
   def hash_of_items_number_by_merchant_id
     @merchants.repository. inject({}) do |hash, merchant|
       item = @items.find_all_by_merchant_id(merchant.id)

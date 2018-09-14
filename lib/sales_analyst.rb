@@ -32,4 +32,9 @@ class SalesAnalyst
     end
   end
 
+  def average_item_price_for_merchant(id)
+    array_prices = @engine.price_of_items_by_merchant(id)
+    average = average_number(sum_of_integers(array_prices), array_prices.length)
+    transform_to_big_decimal(average)
+  end
 end

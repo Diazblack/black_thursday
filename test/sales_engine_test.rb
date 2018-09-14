@@ -39,7 +39,7 @@ class SalesEngineTest < Minitest::Test
     assert_equal "Shopin1901", se.merchants.all.first.name
   end
 
-  def test_if_it_can_an_array_with_the_amount_of_item_by_sold_by_merchant
+  def test_if_it_can_get_an_array_with_the_amount_of_item_by_sold_by_merchant
     hash = {
       :items     => "./data/test_data/items.csv",
       :merchants => "./data/test_data/merchants.csv",
@@ -48,6 +48,21 @@ class SalesEngineTest < Minitest::Test
 
     expected = [1,0,0,0,0,0,0,1,0,0,3]
     assert_equal expected, se.number_of_items_by_merchant
+  end
+
+  def test_if_it_can_get_an_array_with_the_price_of_items_by_sold_by_merchant
+    hash = {
+      :items     => "./data/test_data/items.csv",
+      :merchants => "./data/test_data/merchants.csv",
+    }
+    se = SalesEngine.from_csv(hash)
+
+    array_of_prices = se.price_of_items_by_merchant(12334185)
+
+    assert_equal 3 , array_of_prices.length
+    array_of_prices.each do |price|
+      assert_instance_of BigDecimal, price
+    end
   end
 
   def test_if_it_can_an_hash_with_the_amount_of_item_by_sold_by_merchant_id_greater_then_cero
