@@ -79,4 +79,21 @@ class SalesAnalystTest < Minitest::Test
     assert_instance_of BigDecimal, average_average_price
     assert_equal 4.83, average_average_price.to_f.round(2)
   end
+
+  def test_if_it_can_get_an_array_of_golden_items
+    hash = {
+      :items     => "./data/test_data/items.csv",
+      :merchants => "./data/test_data/merchants.csv",
+    }
+    sales_engine = SalesEngine.from_csv(hash)
+    sales_analyst = SalesAnalyst.new(sales_engine)
+
+    items = sales_analyst.golden_items
+
+
+    assert_equal 5, items.length
+    items.each do |item|
+      assert_instance_of Item, item
+    end
+  end
 end

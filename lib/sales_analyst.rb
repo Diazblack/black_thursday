@@ -17,7 +17,6 @@ class SalesAnalyst
 
   def average_items_per_merchant_standart_deviation
     array_of_items = @engine.number_of_items_by_merchant
-    sum_all_integers = sum_of_integers(array_of_items)
     average = average_items_per_merchant
     subtract = subtract_index(array_of_items, average)
     sum_square_numbers = sum_of_integers(square_numbers(subtract))
@@ -44,5 +43,10 @@ class SalesAnalyst
     end
     average = average_number(sum_of_integers(array_average), @engine.merchants.all.length)
     transform_to_big_decimal(average)
+  end
+
+  def golden_items
+    standart_deviation = average_items_per_merchant_standart_deviation ** 2
+    @engine.items.find_all_by_price_greater_or_lesser(standart_deviation, true)
   end
 end

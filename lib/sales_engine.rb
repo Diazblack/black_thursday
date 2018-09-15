@@ -37,12 +37,9 @@ class SalesEngine
 
   def price_of_items_by_merchant(id)
     items = @items.find_all_by_merchant_id(id)
-    if items != []
-      items.map do |item|
-        item.unit_price
-      end
-    else
-      [0]
+    return [0]  if items == []
+    items.map do |item|
+      item.unit_price
     end
   end
 
