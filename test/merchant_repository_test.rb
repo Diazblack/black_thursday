@@ -15,7 +15,7 @@ class MerchantRepositoryTest < Minitest::Test
   def test_if_it_can_get_merchants_and_get_them_all
     merchant_storage = MerchantRepository.new("./data/test_data/merchants.csv")
 
-    assert_equal 10, merchant_storage.all.length
+    assert_equal 11, merchant_storage.all.length
     assert_instance_of Array, merchant_storage.all
      merchant_storage.all.each do |merchant|
        assert_instance_of Merchant, merchant
@@ -86,7 +86,7 @@ class MerchantRepositoryTest < Minitest::Test
 
     merchant_storage.create(attributes)
 
-    assert_equal 12334146,
+    assert_equal 12334186,
     merchant_storage.repository.last.id
     assert_equal "Turing School of Software and Design",
     merchant_storage.repository.last.name
@@ -100,15 +100,15 @@ class MerchantRepositoryTest < Minitest::Test
 
     merchant_storage.create(attributes)
 
-    assert_equal 12334146,
+    assert_equal 12334186,
     merchant_storage.repository.last.id
     assert_equal "Turing School of Software and Design",
     merchant_storage.repository.last.name
 
 
-    merchant_storage.delete(12334146)
+    merchant_storage.delete(12334186)
 
-    assert_nil merchant_storage.find_by_id(12334146)
+    assert_nil merchant_storage.find_by_id(12334186)
 
     merchant_storage.delete(12334115)
 

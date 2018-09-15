@@ -1,7 +1,10 @@
 require 'bigdecimal'
 require 'bigdecimal/util'
-require 'Time'
+require_relative './modules/mathematics'
+
 class Item
+  include Mathematics
+
   attr_reader :id,
               :name,
               :description,
@@ -32,20 +35,4 @@ class Item
     @unit_price.to_f.round(2)
   end
 
-  def transform_to_big_decimal(data)
-    if data.class != BigDecimal
-      string = data.insert( - 3, ".")
-      BigDecimal.new(string)
-    else
-      data
-    end
-  end
-
-  def transform_to_time(data)
-    if data.class != Time
-      Time.parse(data)
-    else
-      data
-    end
-  end
 end

@@ -138,4 +138,5 @@ class ItemRepositoryTest < Minitest::Test
 
     assert_equal [], items_2
   end
+
 end
