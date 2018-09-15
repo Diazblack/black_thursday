@@ -1,7 +1,9 @@
 require_relative 'merchant_repository'
 require_relative 'item_repository'
+require_relative './modules/mathematics'
 
 class SalesEngine
+  include Mathematics
   attr_reader :items,
               :merchants
 
@@ -34,10 +36,14 @@ class SalesEngine
   end
 
   def price_of_items_by_merchant(id)
-      items = @items.find_all_by_merchant_id(id)
+    items = @items.find_all_by_merchant_id(id)
+    if items != []
       items.map do |item|
         item.unit_price
-      end 
+      end
+    else
+      [0]
+    end
   end
 
   def hash_of_items_number_by_merchant_id

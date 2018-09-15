@@ -34,7 +34,6 @@ module Repository
   end
 
   def update(id_to_find, hash)
-
     single_data = find_by_id(id_to_find)
     single_data.change_attributes(hash) if single_data
   end

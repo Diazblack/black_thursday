@@ -37,4 +37,12 @@ class SalesAnalyst
     average = average_number(sum_of_integers(array_prices), array_prices.length)
     transform_to_big_decimal(average)
   end
+
+  def average_average_price_per_merchant
+    array_average = @engine.merchants.all.map do |merchant|
+      average_item_price_for_merchant(merchant.id)
+    end
+    average = average_number(sum_of_integers(array_average), @engine.merchants.all.length)
+    transform_to_big_decimal(average)
+  end
 end
