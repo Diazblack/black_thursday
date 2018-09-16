@@ -1,5 +1,6 @@
 require_relative 'sales_engine'
 require_relative './modules/mathematics'
+require 'pry'
 
 class SalesAnalyst
   include Mathematics
@@ -15,16 +16,22 @@ class SalesAnalyst
     average_number(sum_of_items, merchants_length)
   end
 
-  def average_items_per_merchant_standart_deviation
+  def average_items_per_merchant_standard_deviation
     array_of_items = @engine.number_of_items_by_merchant
     standard_diviation_array(array_of_items)
   end
 
   def merchants_with_high_item_count
-    standart_deviation = average_items_per_merchant_standart_deviation
+    standart_deviation = average_items_per_merchant_standard_deviation
+    limit = standart_deviation + average_items_per_merchant
     merchant_id = @engine.hash_of_items_number_by_merchant_id
     merchant_id.inject([]) do |array, (key, value)|
-      array << engine.merchants.find_by_id(key) if value > standart_deviation
+      hash = engine.merchants.find_by_id(key)
+      if nil != hash  && value > limit
+        array << hash
+      else
+        array
+      end
     end
   end
 
@@ -48,9 +55,10 @@ class SalesAnalyst
   end
 
   def golden_items
-    standart = standard_diviation_array(array_of_average_price_per_merchant)
-    doble_standart_deviation = standart * 2
-    items = @engine.items
-    items.find_all_by_price_greater_or_lesser(doble_standart_deviation, true)
+    items = @engine.items.array_prices_items
+    average = average_from_array(items)
+    doble_standard_deviation = standard_diviation_array(items) * 2
+    limit = average + doble_standard_deviation
+    @engine.items.find_all_by_price_greater_or_lesser(limit, true)
   end
 end

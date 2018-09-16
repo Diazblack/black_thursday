@@ -5,11 +5,13 @@ require_relative './modules/mathematics'
 class SalesEngine
   include Mathematics
   attr_reader :items,
-              :merchants
+              :merchants,
+              :analyst
 
   def initialize(hash)
     @items = hash[:items]
     @merchants = hash[:merchants]
+    @analyst = SalesAnalyst.new(self)
 
   end
 

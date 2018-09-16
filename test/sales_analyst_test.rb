@@ -10,7 +10,7 @@ class SalesAnalystTest < Minitest::Test
       :merchants => "./data/test_data/merchants.csv",
     }
     sales_engine = SalesEngine.from_csv(hash)
-    sales_analyst = SalesAnalyst.new(sales_engine)
+    sales_analyst = sales_engine.analyst
 
     assert_instance_of SalesAnalyst, sales_analyst
   end
@@ -21,20 +21,20 @@ class SalesAnalystTest < Minitest::Test
       :merchants => "./data/test_data/merchants.csv",
     }
     sales_engine = SalesEngine.from_csv(hash)
-    sales_analyst = SalesAnalyst.new(sales_engine)
+    sales_analyst = sales_engine.analyst
 
     assert_equal 0.45, sales_analyst.average_items_per_merchant
   end
 
-  def test_if_it_can_get_the_average_items_per_merchant_standart_deviation
+  def test_if_it_can_get_the_average_items_per_merchant_standard_deviation
     hash = {
       :items     => "./data/test_data/items.csv",
       :merchants => "./data/test_data/merchants.csv",
     }
     sales_engine = SalesEngine.from_csv(hash)
-    sales_analyst = SalesAnalyst.new(sales_engine)
+    sales_analyst = sales_engine.analyst
 
-    assert_equal 0.89, sales_analyst.average_items_per_merchant_standart_deviation
+    assert_equal 0.89, sales_analyst.average_items_per_merchant_standard_deviation
   end
 
   def test_if_it_can_get_merchants_with_high_item_count
@@ -44,9 +44,9 @@ class SalesAnalystTest < Minitest::Test
     }
 
     sales_engine = SalesEngine.from_csv(hash)
-    sales_analyst = SalesAnalyst.new(sales_engine)
+    sales_analyst = sales_engine.analyst
 
-    assert_equal 3 , sales_analyst.merchants_with_high_item_count.length
+    assert_equal 1, sales_analyst.merchants_with_high_item_count.length
     sales_analyst.merchants_with_high_item_count.each do |merchant|
       assert_instance_of Merchant, merchant
     end
@@ -58,7 +58,7 @@ class SalesAnalystTest < Minitest::Test
       :merchants => "./data/test_data/merchants.csv",
     }
     sales_engine = SalesEngine.from_csv(hash)
-    sales_analyst = SalesAnalyst.new(sales_engine)
+    sales_analyst = sales_engine.analyst
 
     average_price = sales_analyst.average_item_price_for_merchant(12334185)
 
@@ -72,7 +72,7 @@ class SalesAnalystTest < Minitest::Test
       :merchants => "./data/test_data/merchants.csv",
     }
     sales_engine = SalesEngine.from_csv(hash)
-    sales_analyst = SalesAnalyst.new(sales_engine)
+    sales_analyst = sales_engine.analyst
 
     average_average_price = sales_analyst.average_average_price_per_merchant
 
@@ -86,7 +86,7 @@ class SalesAnalystTest < Minitest::Test
       :merchants => "./data/test_data/merchants.csv",
     }
     sales_engine = SalesEngine.from_csv(hash)
-    sales_analyst = SalesAnalyst.new(sales_engine)
+    sales_analyst = sales_engine.analyst
 
     array_of_average_prices = sales_analyst.array_of_average_price_per_merchant
 
@@ -103,14 +103,10 @@ class SalesAnalystTest < Minitest::Test
       :merchants => "./data/test_data/merchants.csv",
     }
     sales_engine = SalesEngine.from_csv(hash)
-    sales_analyst = SalesAnalyst.new(sales_engine)
+    sales_analyst = sales_engine.analyst
 
     items = sales_analyst.golden_items
 
-
-    assert_equal 1, items.length
-    items.each do |item|
-      assert_instance_of Item, item
-    end
+    assert_equal 0, items.length
   end
 end

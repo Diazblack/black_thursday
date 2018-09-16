@@ -43,7 +43,7 @@ module Repository
       if !key
         item.unit_price < money
       else
-        item.unit_price > money
+        item.unit_price >= money
       end
     end
   end
