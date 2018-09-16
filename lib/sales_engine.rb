@@ -1,24 +1,30 @@
 require_relative 'merchant_repository'
 require_relative 'item_repository'
+require_relative 'invoice_repository'
+
 require_relative './modules/mathematics'
 
 class SalesEngine
   include Mathematics
+
   attr_reader :items,
               :merchants,
-              :analyst
+              :analyst,
+              :invoice
 
   def initialize(hash)
     @items = hash[:items]
     @merchants = hash[:merchants]
     @analyst = SalesAnalyst.new(self)
+    @invoice = hash[:invoice]
 
   end
 
   def self.from_csv(hash)
     classes = {
       items: ItemRepository,
-      merchants: MerchantRepository
+      merchants: MerchantRepository,
+      invoice: InvoiceRepository
     }
 
     new_hash = Hash.new(0)

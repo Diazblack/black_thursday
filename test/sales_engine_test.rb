@@ -3,6 +3,7 @@ require_relative 'minitest_helper'
 require_relative '../lib/sales_engine'
 require_relative '../lib/merchant_repository'
 require_relative '../lib/item_repository'
+require_relative '../lib/sales_analyst'
 
 class SalesEngineTest < Minitest::Test
   def test_if_exist
