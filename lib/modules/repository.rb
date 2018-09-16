@@ -21,6 +21,18 @@ module Repository
     end
   end
 
+  def find_all_by_customer_id(id_to_find)
+    @repository.find_all do |single_data|
+      single_data.customer_id == id_to_find
+    end
+  end
+
+  def find_all_by_status(string)
+    @repository.find_all do |single_data|
+      single_data.status.downcase == string.downcase
+    end
+  end
+
   def find_by_name(name_to_find)
     @repository.find do |single_data|
       single_data.name.downcase == name_to_find.downcase
