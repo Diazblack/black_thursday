@@ -46,7 +46,7 @@ class ItemRepository
       range.include?(item.unit_price)
     end
   end
-  ##############
+
   def array_prices_items
     @repository.map do |item|
       item.unit_price
