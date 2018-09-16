@@ -139,4 +139,14 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal [], items_2
   end
 
+  def test_if_it_can_get_an_array_with_all_the_prices
+    items_storage = ItemRepository.new("./data/test_data/items.csv")
+    
+    items = items_storage.array_prices_items
+
+    assert_equal 5, items.length
+    items.each do |price|
+      assert_instance_of BigDecimal, price
+    end
+  end
 end

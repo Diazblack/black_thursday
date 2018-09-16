@@ -38,6 +38,10 @@ module Mathematics
       end
   end
 
+  def average_from_array(array)
+    (sum_of_integers(array).to_f / array.length.to_f).round
+  end
+
   def average_number(sum, length)
      (sum.to_f / length.to_f).round(2)
   end
