@@ -19,4 +19,8 @@ class Invoice
     @updated_at = transform_to_time(hash[:updated_at])
 
   end
-end 
+  
+  def create(hash)
+    create_stuff(hash, @class)
+  end
+end

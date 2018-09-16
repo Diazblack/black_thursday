@@ -1,6 +1,10 @@
 require 'CSV'
 module Repository
 
+  def inspect
+    "#<#{self.class} #{@repository.size} rows>"
+  end
+
   def all
     @repository
   end
@@ -8,6 +12,12 @@ module Repository
   def find_by_id(id_to_find)
     @repository.find do |single_data|
       single_data.id == id_to_find
+    end
+  end
+
+  def find_all_by_merchant_id(id_to_find)
+    @repository.find_all do |single_data|
+      single_data.merchant_id == id_to_find
     end
   end
 

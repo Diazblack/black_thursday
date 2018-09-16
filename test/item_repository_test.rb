@@ -1,8 +1,6 @@
 require_relative 'minitest_helper'
 
 require_relative '../lib/item_repository'
-require_relative '../lib/item'
-require_relative '../lib/modules/repository'
 
 class ItemRepositoryTest < Minitest::Test
   def test_if_exist
@@ -141,7 +139,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_if_it_can_get_an_array_with_all_the_prices
     items_storage = ItemRepository.new("./data/test_data/items.csv")
-    
+
     items = items_storage.array_prices_items
 
     assert_equal 5, items.length
