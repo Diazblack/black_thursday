@@ -57,7 +57,7 @@ module Repository
 
   def update(id_to_find, hash)
     single_data = find_by_id(id_to_find)
-    single_data.change_attributes(hash) if single_data
+    single_data.change_attributes(hash) if single_data != nil
   end
 
   def find_all_by_price_greater_or_lesser(money, key) # key is a boolean

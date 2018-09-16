@@ -19,8 +19,9 @@ class Invoice
     @updated_at = transform_to_time(hash[:updated_at])
 
   end
-  
-  def create(hash)
-    create_stuff(hash, @class)
+
+  def change_attributes(attributes)
+    @status = attributes[:status] if attributes[:status] != nil
+    @updated_at = Time.now
   end
 end

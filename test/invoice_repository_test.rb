@@ -1,6 +1,7 @@
 require_relative 'minitest_helper'
 
 require_relative '../lib/invoice_repository'
+require_relative '../lib/invoice'
 
 class InvoiceRepositoryTest < Minitest::Test
   def setup
@@ -60,4 +61,43 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal [], invoice_2
   end
 
+  def test_if_it_can_create_and_delete_an_invoice
+    hash = {
+      :id          => 6,
+      :customer_id => 7,
+      :merchant_id => 8,
+      :status      => "pending",
+      :created_at  => Time.now,
+      :updated_at  => Time.now,
+    }
+
+    invoice = @invoices
+
+    invoice.create(hash)
+
+    assert_equal 21, invoice.all.length
+    assert_equal 7, invoice.all[20].customer_id
+
+    invoice.delete(21)
+    assert_nil invoice.find_by_id(21)
+  end
+
+  def test_if_it_can_create_and_delete_an_invoice
+    hash = {
+      :id          => 6,
+      :customer_id => 7,
+      :merchant_id => 8,
+      :status      => "Shipped",
+      :created_at  => Time.now,
+      :updated_at  => Time.now,
+    }
+
+    invoice = @invoices
+
+    invoice.update( 4, hash)
+
+    assert_equal 4, invoice.all[3].id
+    assert_equal 1, invoice.all[3].customer_id
+    assert_equal "Shipped", invoice.all[3].status
+  end
 end
