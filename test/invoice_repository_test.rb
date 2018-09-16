@@ -82,7 +82,7 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_nil invoice.find_by_id(21)
   end
 
-  def test_if_it_can_create_and_delete_an_invoice
+  def test_if_it_can_update_an_invoice_with_out_modifeying_other_attributes
     hash = {
       :id          => 6,
       :customer_id => 7,
