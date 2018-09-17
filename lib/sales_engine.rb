@@ -10,13 +10,13 @@ class SalesEngine
   attr_reader :items,
               :merchants,
               :analyst,
-              :invoice
+              :invoices
 
   def initialize(hash)
     @items = hash[:items]
     @merchants = hash[:merchants]
     @analyst = SalesAnalyst.new(self)
-    @invoice = hash[:invoice]
+    @invoices = hash[:invoices]
 
   end
 
@@ -24,7 +24,7 @@ class SalesEngine
     classes = {
       items: ItemRepository,
       merchants: MerchantRepository,
-      invoice: InvoiceRepository
+      invoices: InvoiceRepository
     }
 
     new_hash = Hash.new(0)
