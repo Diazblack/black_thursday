@@ -97,6 +97,26 @@ class SalesAnalystTest < Minitest::Test
     sales_analyst = sales_engine.analyst
 
     actual = sales_analyst.top_merchants_by_invoice_count
-    assert_equal 3.29, actual
+    assert_equal 12, actual.count
+    actual.each do |merchant|
+      assert_instance_of Merchant, merchant
+    end
   end
+
+  def test_if_it_cat_get_bottom_merchants_by_invoice_count
+    hash = {
+      items:      "./data/test_data/items.csv",
+      merchants:  "./data/merchants.csv",
+      invoices:   "./data/invoices.csv"
+    }
+    sales_engine = SalesEngine.from_csv(hash)
+    sales_analyst = sales_engine.analyst
+
+    actual = sales_analyst.bottom_merchants_by_invoice_count
+    assert_equal 4, actual.count
+    actual.each do |merchant|
+      assert_instance_of Merchant, merchant
+    end
+  end
+
 end

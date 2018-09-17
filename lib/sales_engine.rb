@@ -69,7 +69,7 @@ class SalesEngine
   def hash_of_invoices_number_by_merchant_id
     @merchants.repository. inject({}) do |hash, merchant|
       invoices = @invoices.find_all_by_merchant_id(merchant.id)
-      hash[merchant.id] = invoices.length if item.length > 0
+      hash[merchant.id] = invoices.length if invoices.length > 0
       hash
     end
   end

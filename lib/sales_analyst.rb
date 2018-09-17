@@ -25,14 +25,9 @@ class SalesAnalyst
     standart_deviation = average_items_per_merchant_standard_deviation
     limit = standart_deviation + average_items_per_merchant
     merchant_id = @engine.hash_of_items_number_by_merchant_id
-    merchant_id.inject([]) do |array, (key, value)|
-      hash = engine.merchants.find_by_id(key)
-      if nil != hash  && value > limit
-        array << hash
-      else
-        array
-      end
-    end
+    to_look = @engine.merchants
+    direction = true
+    find_all_stuff_by_id(merchant_id, to_look, limit, direction )
   end
 
   def average_item_price_for_merchant(id)
@@ -72,11 +67,33 @@ class SalesAnalyst
     array_of_items = @engine.number_of_invoices_by_merchant
     standard_diviation_array(array_of_items)
   end
-
+###
   def top_merchants_by_invoice_count
     limit = average_invoices_per_merchant + (average_invoices_per_merchant_standard_deviation * 2)
-    hash_of_invoices_number_by_merchant_id.
-
+    merchant_invoices = @engine.hash_of_invoices_number_by_merchant_id
+    to_look = @engine.merchants
+    direction = true
+    find_all_stuff_by_id(merchant_invoices, to_look, limit, direction)
+  end
+###
+  def bottom_merchants_by_invoice_count
+    limit = average_invoices_per_merchant - (average_invoices_per_merchant_standard_deviation * 2)
+    merchant_invoices = @engine.hash_of_invoices_number_by_merchant_id
+    to_look = @engine.merchants
+    direction = false
+    find_all_stuff_by_id(merchant_invoices, to_look, limit, direction)
+  end
+###
+  def find_all_stuff_by_id(stuff, to_look, limit, direction)
+    stuff.inject([]) do |array, (key, value)|
+      hash = to_look.find_by_id(key)
+      if nil != hash  && value > limit && direction
+        array << hash
+      elsif nil != hash  && value < limit && !direction
+        array << hash
+      else
+        array
+      end
     end
   end
 end
