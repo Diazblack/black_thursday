@@ -132,4 +132,17 @@ class SalesAnalystTest < Minitest::Test
     assert_equal  1, actual.count
     assert_equal "Wednesday", actual.first
   end
+  def test_if_it_can_get_a_percentage_of_invoice_status
+    hash = {
+      items:      "./data/test_data/items.csv",
+      merchants:  "./data/merchants.csv",
+      invoices:   "./data/invoices.csv"
+    }
+    sales_engine = SalesEngine.from_csv(hash)
+    sales_analyst = sales_engine.analyst
+
+    assert_equal 29.55, sales_analyst.invoice_status(:pending)
+    assert_equal 56.95, sales_analyst.invoice_status(:shipped) 
+    assert_equal 13.5, sales_analyst.invoice_status(:returned)
+  end
 end

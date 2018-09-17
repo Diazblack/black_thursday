@@ -108,4 +108,10 @@ class SalesAnalyst
       end
     end
   end
+
+  def invoice_status(status)
+    data_1 = @engine.invoices.find_all_by_status(status).count
+    data_2 = @engine.invoices.all.count
+    percentage(data_1, data_2)
+  end
 end

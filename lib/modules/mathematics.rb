@@ -70,4 +70,8 @@ module Mathematics
       (square ** 2).round(2)
     end
   end
+  
+  def percentage(data_1, data_2)
+    ((data_1.to_f / data_2.to_f) * 100).round(2)
+  end
 end
