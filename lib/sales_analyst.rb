@@ -1,9 +1,12 @@
 require_relative 'sales_engine'
 require_relative './modules/mathematics'
+require_relative './modules/sales_analyst_helper'
 require 'pry'
 
 class SalesAnalyst
   include Mathematics
+  include SalesAnalystHelper
+
   attr_reader :engine
 
   def initialize(engine)
@@ -43,12 +46,6 @@ class SalesAnalyst
     transform_to_big_decimal(average)
   end
 
-  def array_of_average_price_per_merchant
-    @engine.merchants.all.map do |merchant|
-      average_item_price_for_merchant(merchant.id)
-    end
-  end
-
   def golden_items
     items = @engine.items.array_prices_items
     average = average_from_array(items)
@@ -67,34 +64,19 @@ class SalesAnalyst
     array_of_items = @engine.number_of_invoices_by_merchant
     standard_diviation_array(array_of_items)
   end
-###
+
   def top_merchants_by_invoice_count
-    limit = average_invoices_per_merchant + (average_invoices_per_merchant_standard_deviation * 2)
-    merchant_invoices = @engine.hash_of_invoices_number_by_merchant_id
-    to_look = @engine.merchants
+    limit = average_invoices_per_merchant
+    limit += (average_invoices_per_merchant_standard_deviation * 2)
     direction = true
-    find_all_stuff_by_id(merchant_invoices, to_look, limit, direction)
+    merchant_invoices(direction, limit)
   end
-###
+
   def bottom_merchants_by_invoice_count
-    limit = average_invoices_per_merchant - (average_invoices_per_merchant_standard_deviation * 2)
-    merchant_invoices = @engine.hash_of_invoices_number_by_merchant_id
-    to_look = @engine.merchants
+    limit = average_invoices_per_merchant
+    limit -= (average_invoices_per_merchant_standard_deviation * 2)
     direction = false
-    find_all_stuff_by_id(merchant_invoices, to_look, limit, direction)
-  end
-###
-  def find_all_stuff_by_id(stuff, to_look, limit, direction)
-    stuff.inject([]) do |array, (key, value)|
-      hash = to_look.find_by_id(key)
-      if nil != hash  && value > limit && direction
-        array << hash
-      elsif nil != hash  && value < limit && !direction
-        array << hash
-      else
-        array
-      end
-    end
+    merchant_invoices(direction, limit)
   end
 
   def top_days_by_invoice_count
