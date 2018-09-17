@@ -61,4 +61,43 @@ class SalesAnalystTest < Minitest::Test
 
     assert_equal 0, items.length
   end
+
+  def test_if_it_cat_get_average_invoices_per_merchant
+    hash = {
+      items:      "./data/test_data/items.csv",
+      merchants:  "./data/merchants.csv",
+      invoices:   "./data/invoices.csv"
+    }
+    sales_engine = SalesEngine.from_csv(hash)
+    sales_analyst = sales_engine.analyst
+
+    assert_equal 10.49 , sales_analyst.average_invoices_per_merchant
+  end
+
+  def test_if_it_cat_get_average_invoices_per_merchant_standard_deviation
+    hash = {
+      items:      "./data/test_data/items.csv",
+      merchants:  "./data/merchants.csv",
+      invoices:   "./data/invoices.csv"
+    }
+    sales_engine = SalesEngine.from_csv(hash)
+    sales_analyst = sales_engine.analyst
+
+    actual = sales_analyst.average_invoices_per_merchant_standard_deviation
+    assert_equal 3.29, actual
+  end
+
+  def test_if_it_cat_get_top_merchants_by_invoice_count
+    skip
+    hash = {
+      items:      "./data/test_data/items.csv",
+      merchants:  "./data/merchants.csv",
+      invoices:   "./data/invoices.csv"
+    }
+    sales_engine = SalesEngine.from_csv(hash)
+    sales_analyst = sales_engine.analyst
+
+    actual = sales_analyst.top_merchants_by_invoice_count
+    assert_equal 3.29, actual
+  end
 end

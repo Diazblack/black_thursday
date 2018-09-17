@@ -61,4 +61,18 @@ class SalesAnalyst
     limit = average + doble_standard_deviation
     @engine.items.find_all_by_price_greater_or_lesser(limit, true)
   end
+
+  def average_invoices_per_merchant
+      sum_of_items = sum_of_integers(@engine.number_of_invoices_by_merchant)
+      merchants_length = @engine.merchants.all.length
+      average_number(sum_of_items, merchants_length)
+  end
+
+  def average_invoices_per_merchant_standard_deviation
+    array_of_items = @engine.number_of_invoices_by_merchant
+    standard_diviation_array(array_of_items)
+  end
+
+  def top_merchants_by_invoice_count
+  end
 end

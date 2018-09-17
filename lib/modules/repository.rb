@@ -69,4 +69,11 @@ module Repository
       end
     end
   end
+
+  def number_of_items_by_merchant
+    @merchants.repository.map do |merchant|
+      items = @items.find_all_by_merchant_id(merchant.id)
+      items.length
+    end
+  end
 end

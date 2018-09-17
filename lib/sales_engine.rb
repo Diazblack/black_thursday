@@ -58,4 +58,11 @@ class SalesEngine
       hash
     end
   end
+
+  def number_of_invoices_by_merchant
+    @merchants.repository.map do |merchant|
+      invoice = @invoices.find_all_by_merchant_id(merchant.id)
+      invoice.length
+    end 
+  end
 end
