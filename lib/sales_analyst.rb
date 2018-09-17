@@ -96,4 +96,16 @@ class SalesAnalyst
       end
     end
   end
+
+  def top_days_by_invoice_count
+    hash = @engine.invoices.find_all_by_day_created_at
+    limit = (average_from_array(hash) + standard_diviation_array(hash)).round
+    hash.inject([]) do |array, (key, value)|
+      if key != nil && value > limit
+        array << key
+      else
+        array
+      end
+    end
+  end
 end

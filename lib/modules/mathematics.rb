@@ -33,9 +33,15 @@ module Mathematics
   end
 
   def sum_of_integers(array)
+    if array.class == Array
       array.inject(0) do |sum, item|
         sum += item
       end
+    elsif array.class == Hash
+      array.inject(0) do |sum, (key, value)|
+        sum += value
+      end
+    end
   end
 
   def average_from_array(array)
@@ -47,8 +53,15 @@ module Mathematics
   end
 
   def subtract_index(array, average)
-    array.map do |index|
-      (index - average).round(2)
+    if array.class == Array
+      array.map do |index|
+        (index - average).round(2)
+      end
+    elsif array.class == Hash
+      array.inject([]) do |array, (key, value)|
+        array << (value - average).round(2)
+        array
+      end
     end
   end
 

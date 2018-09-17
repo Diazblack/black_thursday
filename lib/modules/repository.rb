@@ -59,7 +59,7 @@ module Repository
     single_data = find_by_id(id_to_find)
     single_data.change_attributes(hash) if single_data != nil
   end
-
+####
   def find_all_by_price_greater_or_lesser(money, key) # key is a boolean
     @repository.find_all do |item|
       if !key
@@ -74,6 +74,23 @@ module Repository
     @merchants.repository.map do |merchant|
       items = @items.find_all_by_merchant_id(merchant.id)
       items.length
+    end
+  end
+
+  def find_all_by_day_created_at
+    hash_days_of_week = {
+      0 => "Sunday",
+      1 => "Monday",
+      2 => "Tuesday",
+      3 => "Wednesday",
+      4 => "Thursday",
+      5 => "Friday",
+      6 => "Saturday"
+    }
+    @repository.inject(Hash.new(0)) do |hash, stuff|
+      day_integer = hash_days_of_week[stuff.created_at.wday]
+      hash[day_integer] += 1
+      hash
     end
   end
 end

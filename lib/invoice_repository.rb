@@ -12,6 +12,7 @@ class InvoiceRepository
     @repository = []
     @class = Invoice
     get_stuff(path, @class)
+
   end
 
   def create(hash)

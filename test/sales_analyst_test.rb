@@ -119,4 +119,17 @@ class SalesAnalystTest < Minitest::Test
     end
   end
 
+  def test_if_can_get_top_days_by_invoice_count
+    hash = {
+      items:      "./data/test_data/items.csv",
+      merchants:  "./data/merchants.csv",
+      invoices:   "./data/invoices.csv"
+    }
+    sales_engine = SalesEngine.from_csv(hash)
+    sales_analyst = sales_engine.analyst
+
+    actual = sales_analyst.top_days_by_invoice_count
+    assert_equal  1, actual.count
+    assert_equal "Wednesday", actual.first
+  end
 end
