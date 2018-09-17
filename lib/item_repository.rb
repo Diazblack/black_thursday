@@ -1,7 +1,6 @@
 require_relative 'item'
 require_relative './modules/repository'
 require_relative './modules/csv_adapter'
-require 'Time'
 
 class ItemRepository
   include Repository
@@ -15,10 +14,6 @@ class ItemRepository
     get_stuff(path, @class)
   end
 
-  def inspect
-    "#<#{self.class} #{@repository.size} rows>"
-  end
-
   def create(hash)
     create_stuff(hash, @class)
   end
@@ -26,12 +21,6 @@ class ItemRepository
   def find_all_with_description(words)
     @repository.find_all do |item|
       item.description.downcase.include?(words.downcase)
-    end
-  end
-
-  def find_all_by_merchant_id(id)
-    @repository.find_all do |item|
-      item.merchant_id == id
     end
   end
 
@@ -46,7 +35,7 @@ class ItemRepository
       range.include?(item.unit_price)
     end
   end
-  ##############
+
   def array_prices_items
     @repository.map do |item|
       item.unit_price
