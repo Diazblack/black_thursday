@@ -22,7 +22,7 @@ class InvoiceRepositoryTest < Minitest::Test
     end
     assert_equal 2, @invoices.all[8].customer_id
     assert_equal 12334771, @invoices.all[10].merchant_id
-    assert_equal "shipped", @invoices.all[15].status
+    assert_equal :shipped, @invoices.all[15].status
   end
 
   def test_if_it_can_find_invoice_by_id
@@ -98,6 +98,6 @@ class InvoiceRepositoryTest < Minitest::Test
 
     assert_equal 4, invoice.all[3].id
     assert_equal 1, invoice.all[3].customer_id
-    assert_equal "Shipped", invoice.all[3].status
+    assert_equal :shipped, invoice.all[3].status
   end
 end

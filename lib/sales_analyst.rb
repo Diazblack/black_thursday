@@ -74,5 +74,9 @@ class SalesAnalyst
   end
 
   def top_merchants_by_invoice_count
+    limit = average_invoices_per_merchant + (average_invoices_per_merchant_standard_deviation * 2)
+    hash_of_invoices_number_by_merchant_id.
+
+    end
   end
 end

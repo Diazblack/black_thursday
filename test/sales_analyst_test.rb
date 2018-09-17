@@ -88,7 +88,6 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_if_it_cat_get_top_merchants_by_invoice_count
-    skip
     hash = {
       items:      "./data/test_data/items.csv",
       merchants:  "./data/merchants.csv",

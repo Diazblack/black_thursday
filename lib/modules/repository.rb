@@ -29,7 +29,7 @@ module Repository
 
   def find_all_by_status(string)
     @repository.find_all do |single_data|
-      single_data.status.downcase == string.downcase
+      single_data.status.downcase == string.downcase.to_sym
     end
   end
 
