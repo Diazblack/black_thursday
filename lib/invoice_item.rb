@@ -1,31 +1,30 @@
 require_relative './modules/mathematics'
 
-class Item
+class InvoiceItem
   include Mathematics
 
   attr_reader :id,
-              :name,
-              :description,
+              :item_id,
+              :invoice_id,
+              :quantity,
               :unit_price,
               :created_at,
-              :updated_at,
-              :merchant_id
+              :updated_at
 
   def initialize(hash)
     @id = hash[:id].to_i
-    @name = hash[:name]
-    @description = hash[:description]
+    @item_id = hash[:item_id].to_i
+    @invoice_id = hash[:invoice_id].to_i
+    @quantity = hash[:quantity]
     @unit_price = transform_to_big_decimal(hash[:unit_price])
     @created_at = transform_to_time(hash[:created_at])
     @updated_at = transform_to_time(hash[:updated_at])
-    @merchant_id = hash[:merchant_id].to_i
-
   end
 
   def change_attributes(attributes)
-    @name = attributes[:name] if attributes[:name] != nil
-    @description = attributes[:description] if attributes[:description] != nil
+    @quantity = attributes[:quantity] if attributes[:quantity] != nil
     @unit_price = attributes[:unit_price] if attributes[:unit_price] != nil
     @updated_at = Time.now
   end
+
 end

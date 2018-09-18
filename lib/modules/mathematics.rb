@@ -23,6 +23,10 @@ module Mathematics
     end
   end
 
+  def unit_price_to_dollars
+    @unit_price.to_f.round(2)
+  end
+
   def standard_diviation_array(array)
     sum_all_integers = sum_of_integers(array)
     average = average_number(sum_all_integers, array.length)
@@ -70,7 +74,7 @@ module Mathematics
       (square ** 2).round(2)
     end
   end
-  
+
   def percentage(data_1, data_2)
     ((data_1.to_f / data_2.to_f) * 100).round(2)
   end
