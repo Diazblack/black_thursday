@@ -13,7 +13,7 @@ class TransactionTest < Minitest::Test
       :created_at => Time.now,
       :updated_at => Time.now
     })
-    
+
   end
 
   def test_if_exist
@@ -23,9 +23,9 @@ class TransactionTest < Minitest::Test
   def test_if_can_store_attributes
     assert_equal 6, @transaction.id
     assert_equal 8, @transaction.invoice_id
-    assert_equal "4242424242424242", @transaction.credit_card_number
-    assert_equal "0220", @transaction.credit_card_expiration_date
-    assert_equal "success", @transaction.result
+    assert_equal 4242424242424242, @transaction.credit_card_number
+    assert_equal 0220, @transaction.credit_card_expiration_date
+    assert_equal :success, @transaction.result
     assert_instance_of Time , @transaction.created_at
     assert_instance_of Time , @transaction.updated_at
   end
