@@ -13,6 +13,7 @@ class TransactionTest < Minitest::Test
       :created_at => Time.now,
       :updated_at => Time.now
     })
+    
   end
 
   def test_if_exist
@@ -28,5 +29,4 @@ class TransactionTest < Minitest::Test
     assert_instance_of Time , @transaction.created_at
     assert_instance_of Time , @transaction.updated_at
   end
-
 end

@@ -20,4 +20,15 @@ class Transaction
     @created_at = transform_to_time(hash[:created_at])
     @updated_at = transform_to_time(hash[:updated_at])
   end
+
+  def change_attributes(attributes)
+    if attributes[:credit_card_number] != nil
+      @credit_card_number = attributes[:credit_card_number]
+    end
+    if attributes[:credit_card_expiration_date] != nil
+      @result = attributes[:result] if attributes[:result] != nil
+    end
+    @credit_card_expiration_date = attributes[:credit_card_expiration_date]
+    @updated_at = Time.now
+  end
 end
