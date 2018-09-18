@@ -15,7 +15,7 @@ class InvoiceItem
     @id = hash[:id].to_i
     @item_id = hash[:item_id].to_i
     @invoice_id = hash[:invoice_id].to_i
-    @quantity = hash[:quantity]
+    @quantity = hash[:quantity].to_i
     @unit_price = transform_to_big_decimal(hash[:unit_price])
     @created_at = transform_to_time(hash[:created_at])
     @updated_at = transform_to_time(hash[:updated_at])

@@ -2,7 +2,7 @@ require_relative 'invoice_item'
 require_relative './modules/repository'
 require_relative './modules/csv_adapter'
 
-class InvoiceRepository
+class InvoiceItemRepository
   include Repository
   include CSVAdapter
 

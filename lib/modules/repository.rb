@@ -27,6 +27,18 @@ module Repository
     end
   end
 
+  def find_all_by_item_id(id_to_find)
+    @repository.find_all do |single_data|
+      single_data.item_id == id_to_find
+    end
+  end
+
+  def find_all_by_invoice_id(id_to_find)
+    @repository.find_all do |single_data|
+      single_data.invoice_id == id_to_find
+    end
+  end 
+
   def find_all_by_status(string)
     @repository.find_all do |single_data|
       single_data.status.downcase == string.downcase.to_sym
@@ -59,7 +71,7 @@ module Repository
     single_data = find_by_id(id_to_find)
     single_data.change_attributes(hash) if single_data != nil
   end
-  
+
   def find_all_by_price_greater_or_lesser(money, key) # key is a boolean
     @repository.find_all do |item|
       if !key
