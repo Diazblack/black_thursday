@@ -10,21 +10,27 @@ class SalesEngine
   attr_reader :items,
               :merchants,
               :analyst,
-              :invoices
+              :invoices,
+              :invoice_items,
+              :transactions
 
   def initialize(hash)
     @items = hash[:items]
     @merchants = hash[:merchants]
     @analyst = SalesAnalyst.new(self)
     @invoices = hash[:invoices]
-
+    @invoice_items = hash[:invoice_items]
+    @transactions = hash[:transactions]
   end
 
   def self.from_csv(hash)
     classes = {
       items: ItemRepository,
       merchants: MerchantRepository,
-      invoices: InvoiceRepository
+      invoices: InvoiceRepository,
+      invoice_items: InvoiceItemRepository,
+      transactions: TransactionRepository
+
     }
 
     new_hash = Hash.new(0)
