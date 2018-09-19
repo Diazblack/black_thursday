@@ -69,6 +69,18 @@ module Repository
     end
   end
 
+  def find_all_by_first_name(partial_name)
+    @repository.find_all do |single_data|
+      single_data.first_name.downcase.include?(partial_name.downcase)
+    end
+  end
+  
+  def find_all_by_last_name(partial_name)
+    @repository.find_all do |single_data|
+      single_data.last_name.downcase.include?(partial_name.downcase)
+    end
+  end
+
   def create_stuff(hash, object_class)
     new_id = @repository.last.id + 1
     hash[:id] = new_id
