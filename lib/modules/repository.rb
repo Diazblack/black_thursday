@@ -20,7 +20,7 @@ module Repository
       single_data.name.downcase == name_to_find.downcase
     end
   end
-  
+
   def find_all_by_merchant_id(id_to_find)
     @repository.find_all do |single_data|
       single_data.merchant_id == id_to_find
@@ -54,6 +54,12 @@ module Repository
   def find_all_by_credit_card_number(number)
     @repository.find_all do |single_data|
       single_data.credit_card_number == number
+    end
+  end
+
+  def find_all_by_result(result_to_find)
+    @repository.find_all do |single_data|
+      single_data.result == result_to_find
     end
   end
 

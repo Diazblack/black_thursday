@@ -45,6 +45,31 @@ class TransactionTest < Minitest::Test
   end
 
   def test_if_it_can_find_all_by_result
-    transaction = @transactions.find_all_result(:success)
+    result = :success
+    transaction = @transactions.find_all_by_result(result)
+
+    assert_equal 4158, transaction.count
+    assert_instance_of Transaction, transaction.first
+    assert_equal result, transaction.first.result
+  end
+
+  def test_if_it_can_create_and_delete_a_transaction
+    hash = {
+      :invoice_id => 8,
+      :credit_card_number => "4242424242424242",
+      :credit_card_expiration_date => "0220",
+      :result => "success",
+      :created_at => Time.now,
+      :updated_at => Time.now
+    }
+    transaction = @transactions.create(hash)
+
+    expected = 4242424242424242
+    assert_equal expected, @transactions.all.last.credit_card_number
+    assert_equal 8, @transactions.find_by_id(4986).invoice_id
+
+    @transactions.delete(4986)
+
+    assert_nil @transactions.find_by_id(4986)
   end
 end
