@@ -180,7 +180,7 @@ class SalesAnalystTest < Minitest::Test
 
     total = sales_analyst.invoice_total(1)
 
-    assert_equal 21067.77, total.unit_price_to_dollars
+    assert_equal 21067.77, total
     assert_instance_of BigDecimal, total
   end
 end

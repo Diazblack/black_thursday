@@ -27,4 +27,7 @@ class InvoiceItem
     @updated_at = Time.now
   end
 
+  def total_amount
+    @quantity * @unit_price
+  end
 end

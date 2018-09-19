@@ -105,5 +105,11 @@ class SalesAnalyst
   end
 
   def invoice_total(id_to_find)
-  end 
+    if invoice_paid_in_full?(id_to_find)
+      invoice_items = @engine.invoice_items.find_all_by_invoice_id(id_to_find)
+      invoice_items.inject(0) do |sum, invoice_item|
+        sum += invoice_item.total_amount
+      end
+    end
+  end
 end
