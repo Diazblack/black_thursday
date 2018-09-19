@@ -6,6 +6,8 @@ class CustomerRepository
   include Repository
   include CSVAdapter
 
+  attr_reader :repository
+  
   def initialize(path)
     @repository = []
     @class = Customer

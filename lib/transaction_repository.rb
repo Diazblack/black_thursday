@@ -12,7 +12,6 @@ class TransactionRepository
     @repository = []
     @class = Transaction
     get_stuff(path, @class)
-
   end
 
   def create(hash)
