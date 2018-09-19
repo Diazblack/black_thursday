@@ -1,6 +1,8 @@
 require_relative 'merchant_repository'
 require_relative 'item_repository'
 require_relative 'invoice_repository'
+require_relative 'invoice_item_repository'
+require_relative 'transaction_repository'
 
 require_relative './modules/mathematics'
 
@@ -30,12 +32,11 @@ class SalesEngine
       invoices: InvoiceRepository,
       invoice_items: InvoiceItemRepository,
       transactions: TransactionRepository
-
     }
 
     new_hash = Hash.new(0)
     hash.each_pair do |key, path|
-      if classes[key] != nil
+      if classes[key] != nil && path != nil
         new_hash[key] = classes[key].new(path)
       end
     end

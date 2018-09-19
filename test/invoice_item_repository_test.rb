@@ -58,13 +58,13 @@ class InvoiceItemRepositoryTest < Minitest::Test
       :updated_at => Time.now
     }
 
-    invoice_item = @invoice_items.create(hash)
+    @invoice_items.create(hash)
 
     assert_instance_of InvoiceItem, @invoice_items.all.last
     assert_equal 101, @invoice_items.all.last.id
     assert_equal 3280779, @invoice_items.all.last.item_id
 
-    invoice_item_2 = @invoice_items.delete(101)
+    @invoice_items.delete(101)
 
     assert_nil @invoice_items.find_by_id(101)
     assert_equal 100, @invoice_items.all.count
@@ -81,7 +81,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
       :updated_at => Time.now
     }
 
-    invoice_item = @invoice_items.update(50, hash)
+    @invoice_items.update(50, hash)
 
     assert_equal 50, @invoice_items.all[49].id
     assert_equal 200, @invoice_items.all[49].quantity

@@ -1,16 +1,17 @@
 require_relative 'minitest_helper'
 
 require_relative '../lib/sales_engine'
-require_relative '../lib/merchant_repository'
-require_relative '../lib/item_repository'
 require_relative '../lib/sales_analyst'
+
 
 class SalesEngineTest < Minitest::Test
   def setup
     hash = {
       items:      "./data/test_data/items.csv",
       merchants:  "./data/test_data/merchants.csv",
-      invoices:   "./data/test_data/invoices.csv"
+      invoices:   "./data/test_data/invoices.csv",
+      invoice_item: "./data/test_data/invoice_items.csv",
+      transactions: "./data/transactions.csv"
     }
     @sales_engine = SalesEngine.from_csv(hash)
   end
