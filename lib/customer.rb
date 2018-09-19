@@ -18,7 +18,7 @@ class Customer
 
   end
 
-  def change_attributes(attributes)
+  def change_attributes(hash)
     @first_name = hash[:first_name] if hash[:first_name] != nil
     @last_name = hash[:last_name] if hash[:last_name] != nil
     @updated_at = Time.now

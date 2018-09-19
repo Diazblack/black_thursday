@@ -3,6 +3,7 @@ require_relative 'item_repository'
 require_relative 'invoice_repository'
 require_relative 'invoice_item_repository'
 require_relative 'transaction_repository'
+require_relative 'customer_repository'
 
 require_relative './modules/mathematics'
 
@@ -14,7 +15,8 @@ class SalesEngine
               :analyst,
               :invoices,
               :invoice_items,
-              :transactions
+              :transactions,
+              :customers
 
   def initialize(hash)
     @items = hash[:items]
@@ -23,6 +25,7 @@ class SalesEngine
     @invoices = hash[:invoices]
     @invoice_items = hash[:invoice_items]
     @transactions = hash[:transactions]
+    @customers = hash[:customers]
   end
 
   def self.from_csv(hash)
@@ -31,7 +34,8 @@ class SalesEngine
       merchants: MerchantRepository,
       invoices: InvoiceRepository,
       invoice_items: InvoiceItemRepository,
-      transactions: TransactionRepository
+      transactions: TransactionRepository,
+      customers: CustomerRepository
     }
 
     new_hash = Hash.new(0)

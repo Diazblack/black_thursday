@@ -69,11 +69,9 @@ class CustomerRepositoryTest < Minitest::Test
       :updated_at => Time.now
     }
 
-    @customers.update(hash)
+    @customers.update(501, hash)
 
-    assert_equal "Joan", @customers.all.last.first_name
-    assert_equal 1001, @customers.all.last.id
-    assert_instance_of Time, @customers.find_by_id(1001).created_at
-
+    assert_equal "Joan", @customers.find_by_id(501).first_name
+    assert_equal 501, @customers.find_by_id(501).id
   end
 end

@@ -11,7 +11,8 @@ class SalesEngineTest < Minitest::Test
       merchants:  "./data/test_data/merchants.csv",
       invoices:   "./data/test_data/invoices.csv",
       invoice_item: "./data/test_data/invoice_items.csv",
-      transactions: "./data/transactions.csv"
+      transactions: "./data/transactions.csv",
+      customers: "./data/customers.csv"
     }
     @sales_engine = SalesEngine.from_csv(hash)
   end
@@ -62,5 +63,16 @@ class SalesEngineTest < Minitest::Test
   def test_if_it_can_an_hash_with_the_amount_of_item_by_sold_by_merchant_id_greater_then_cero
     expected = {12334141 => 1, 12334105 => 1, 12334185 => 3}
     assert_equal expected, @sales_engine.hash_of_items_number_by_merchant_id
+  end
+
+  def test_if_it_can_get_number_of_invoices_by_merchant
+    expected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    assert_equal expected, @sales_engine.number_of_invoices_by_merchant
+  end
+
+  def test_if_can_get_hash_of_invoices_number_by_merchant_id
+
+    assert_equal ({}), @sales_engine.hash_of_invoices_number_by_merchant_id
   end
 end
