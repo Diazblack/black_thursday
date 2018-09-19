@@ -96,4 +96,20 @@ class SalesAnalyst
     data_2 = @engine.invoices.all.count
     percentage(data_1, data_2)
   end
+
+  def invoice_paid_in_full?(id_to_find)
+    transactions = @engine.transactions.find_all_by_invoice_id(id_to_find)
+    transactions.any? do |transaction|
+      transaction.result == :success
+    end
+  end
+
+  def invoice_total(id_to_find)
+    if invoice_paid_in_full?(id_to_find)
+      invoice_items = @engine.invoice_items.find_all_by_invoice_id(id_to_find)
+      invoice_items.inject(0) do |sum, invoice_item|
+        sum += invoice_item.total_amount
+      end
+    end
+  end
 end

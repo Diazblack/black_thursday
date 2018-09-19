@@ -142,7 +142,45 @@ class SalesAnalystTest < Minitest::Test
     sales_analyst = sales_engine.analyst
 
     assert_equal 29.55, sales_analyst.invoice_status(:pending)
-    assert_equal 56.95, sales_analyst.invoice_status(:shipped) 
+    assert_equal 56.95, sales_analyst.invoice_status(:shipped)
     assert_equal 13.5, sales_analyst.invoice_status(:returned)
+  end
+
+  def test_if_it_can_know_invoice_paid_in_full
+    hash = {
+      items:      "./data/test_data/items.csv",
+      merchants:  "./data/test_data/merchants.csv",
+      invoices:   "./data/test_data/invoices.csv",
+      invoice_items: "./data/test_data/invoice_items.csv",
+      transactions: "./data/transactions.csv",
+      customers: "./data/customers.csv"
+    }
+
+    sales_engine = SalesEngine.from_csv(hash)
+    sales_analyst = sales_engine.analyst
+
+    assert_equal true, sales_analyst.invoice_paid_in_full?(1)
+    assert_equal true, sales_analyst.invoice_paid_in_full?(200)
+    assert_equal false, sales_analyst.invoice_paid_in_full?(203)
+    assert_equal false, sales_analyst.invoice_paid_in_full?(204)
+  end
+
+  def test_if_it_can_get_the_total_amount_of_an_invoice
+    hash = {
+      items:      "./data/test_data/items.csv",
+      merchants:  "./data/test_data/merchants.csv",
+      invoices:   "./data/test_data/invoices.csv",
+      invoice_items: "./data/test_data/invoice_items.csv",
+      transactions: "./data/transactions.csv",
+      customers: "./data/customers.csv"
+    }
+
+    sales_engine = SalesEngine.from_csv(hash)
+    sales_analyst = sales_engine.analyst
+
+    total = sales_analyst.invoice_total(1)
+
+    assert_equal 21067.77, total
+    assert_instance_of BigDecimal, total
   end
 end

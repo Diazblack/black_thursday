@@ -27,6 +27,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
   def test_if_it_can_find_invoice_by_id
     invoice = @invoices.find_by_id(13)
+    
     assert_equal 13, invoice.id
     assert_equal 12335955, invoice.merchant_id
   end

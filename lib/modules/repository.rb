@@ -15,6 +15,12 @@ module Repository
     end
   end
 
+  def find_by_name(name_to_find)
+    @repository.find do |single_data|
+      single_data.name.downcase == name_to_find.downcase
+    end
+  end
+
   def find_all_by_merchant_id(id_to_find)
     @repository.find_all do |single_data|
       single_data.merchant_id == id_to_find
@@ -27,21 +33,51 @@ module Repository
     end
   end
 
+  def find_all_by_item_id(id_to_find)
+    @repository.find_all do |single_data|
+      single_data.item_id == id_to_find
+    end
+  end
+
+  def find_all_by_invoice_id(id_to_find)
+    @repository.find_all do |single_data|
+      single_data.invoice_id == id_to_find
+    end
+  end
+
   def find_all_by_status(string)
     @repository.find_all do |single_data|
       single_data.status.downcase == string.downcase.to_sym
     end
   end
 
-  def find_by_name(name_to_find)
-    @repository.find do |single_data|
-      single_data.name.downcase == name_to_find.downcase
+  def find_all_by_credit_card_number(number)
+    @repository.find_all do |single_data|
+      single_data.credit_card_number == number
+    end
+  end
+
+  def find_all_by_result(result_to_find)
+    @repository.find_all do |single_data|
+      single_data.result == result_to_find
     end
   end
 
   def find_all_by_name(partial_name)
     @repository.find_all do |single_data|
       single_data.name.downcase.include?(partial_name.downcase)
+    end
+  end
+
+  def find_all_by_first_name(partial_name)
+    @repository.find_all do |single_data|
+      single_data.first_name.downcase.include?(partial_name.downcase)
+    end
+  end
+  
+  def find_all_by_last_name(partial_name)
+    @repository.find_all do |single_data|
+      single_data.last_name.downcase.include?(partial_name.downcase)
     end
   end
 
@@ -59,7 +95,7 @@ module Repository
     single_data = find_by_id(id_to_find)
     single_data.change_attributes(hash) if single_data != nil
   end
-  
+
   def find_all_by_price_greater_or_lesser(money, key) # key is a boolean
     @repository.find_all do |item|
       if !key

@@ -1,6 +1,9 @@
 require_relative 'merchant_repository'
 require_relative 'item_repository'
 require_relative 'invoice_repository'
+require_relative 'invoice_item_repository'
+require_relative 'transaction_repository'
+require_relative 'customer_repository'
 
 require_relative './modules/mathematics'
 
@@ -10,26 +13,34 @@ class SalesEngine
   attr_reader :items,
               :merchants,
               :analyst,
-              :invoices
+              :invoices,
+              :invoice_items,
+              :transactions,
+              :customers
 
   def initialize(hash)
     @items = hash[:items]
     @merchants = hash[:merchants]
     @analyst = SalesAnalyst.new(self)
     @invoices = hash[:invoices]
-
+    @invoice_items = hash[:invoice_items]
+    @transactions = hash[:transactions]
+    @customers = hash[:customers]
   end
 
   def self.from_csv(hash)
     classes = {
       items: ItemRepository,
       merchants: MerchantRepository,
-      invoices: InvoiceRepository
+      invoices: InvoiceRepository,
+      invoice_items: InvoiceItemRepository,
+      transactions: TransactionRepository,
+      customers: CustomerRepository
     }
 
     new_hash = Hash.new(0)
     hash.each_pair do |key, path|
-      if classes[key] != nil
+      if classes[key] != nil && path != nil
         new_hash[key] = classes[key].new(path)
       end
     end
