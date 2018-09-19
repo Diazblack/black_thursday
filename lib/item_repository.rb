@@ -1,10 +1,12 @@
 require_relative 'item'
 require_relative './modules/repository'
 require_relative './modules/csv_adapter'
+require_relative './modules/find'
 
 class ItemRepository
   include Repository
   include CSVAdapter
+  include Find
 
   attr_reader :repository
 
@@ -19,15 +21,11 @@ class ItemRepository
   end
 
   def find_all_with_description(words)
-    @repository.find_all do |item|
-      item.description.downcase.include?(words.downcase)
-    end
+    find_all_by_string(words, "description")
   end
 
   def find_all_by_price(money)
-    @repository.find_all do |item|
-      item.unit_price == money
-    end
+    find_all_by_method(money, "unit_price")
   end
 
   def find_all_by_price_in_range(range)

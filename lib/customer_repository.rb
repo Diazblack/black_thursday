@@ -1,13 +1,15 @@
 require_relative 'customer'
 require_relative './modules/repository'
 require_relative './modules/csv_adapter'
+require_relative './modules/find'
 
 class CustomerRepository
   include Repository
   include CSVAdapter
-
-  attr_reader :repository
+  include Find
   
+  attr_reader :repository
+
   def initialize(path)
     @repository = []
     @class = Customer

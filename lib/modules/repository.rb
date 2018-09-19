@@ -21,65 +21,65 @@ module Repository
     end
   end
 
-  def find_all_by_merchant_id(id_to_find)
-    @repository.find_all do |single_data|
-      single_data.merchant_id == id_to_find
-    end
-  end
-
-  def find_all_by_customer_id(id_to_find)
-    @repository.find_all do |single_data|
-      single_data.customer_id == id_to_find
-    end
-  end
-
-  def find_all_by_item_id(id_to_find)
-    @repository.find_all do |single_data|
-      single_data.item_id == id_to_find
-    end
-  end
-
-  def find_all_by_invoice_id(id_to_find)
-    @repository.find_all do |single_data|
-      single_data.invoice_id == id_to_find
-    end
-  end
-
-  def find_all_by_status(string)
-    @repository.find_all do |single_data|
-      single_data.status.downcase == string.downcase.to_sym
-    end
-  end
-
-  def find_all_by_credit_card_number(number)
-    @repository.find_all do |single_data|
-      single_data.credit_card_number == number
-    end
-  end
-
-  def find_all_by_result(result_to_find)
-    @repository.find_all do |single_data|
-      single_data.result == result_to_find
-    end
-  end
-
-  def find_all_by_name(partial_name)
-    @repository.find_all do |single_data|
-      single_data.name.downcase.include?(partial_name.downcase)
-    end
-  end
-
-  def find_all_by_first_name(partial_name)
-    @repository.find_all do |single_data|
-      single_data.first_name.downcase.include?(partial_name.downcase)
-    end
-  end
-  
-  def find_all_by_last_name(partial_name)
-    @repository.find_all do |single_data|
-      single_data.last_name.downcase.include?(partial_name.downcase)
-    end
-  end
+  # def find_all_by_merchant_id(id_to_find)
+  #   @repository.find_all do |single_data|
+  #     single_data.merchant_id == id_to_find
+  #   end
+  # end
+  #
+  # def find_all_by_customer_id(id_to_find)
+  #   @repository.find_all do |single_data|
+  #     single_data.customer_id == id_to_find
+  #   end
+  # end
+  #
+  # def find_all_by_item_id(id_to_find)
+  #   @repository.find_all do |single_data|
+  #     single_data.item_id == id_to_find
+  #   end
+  # end
+  #
+  # def find_all_by_invoice_id(id_to_find)
+  #   @repository.find_all do |single_data|
+  #     single_data.invoice_id == id_to_find
+  #   end
+  # end
+  #
+  # def find_all_by_status(string)
+  #   @repository.find_all do |single_data|
+  #     single_data.status.downcase == string.downcase.to_sym
+  #   end
+  # end
+  #
+  # def find_all_by_credit_card_number(number)
+  #   @repository.find_all do |single_data|
+  #     single_data.credit_card_number == number
+  #   end
+  # end
+  #
+  # def find_all_by_result(result_to_find)
+  #   @repository.find_all do |single_data|
+  #     single_data.result == result_to_find
+  #   end
+  # end
+  #
+  # def find_all_by_name(partial_name)
+  #   @repository.find_all do |single_data|
+  #     single_data.name.downcase.include?(partial_name.downcase)
+  #   end
+  # end
+  #
+  # def find_all_by_first_name(partial_name)
+  #   @repository.find_all do |single_data|
+  #     single_data.first_name.downcase.include?(partial_name.downcase)
+  #   end
+  # end
+  #
+  # def find_all_by_last_name(partial_name)
+  #   @repository.find_all do |single_data|
+  #     single_data.last_name.downcase.include?(partial_name.downcase)
+  #   end
+  # end
 
   def create_stuff(hash, object_class)
     new_id = @repository.last.id + 1
