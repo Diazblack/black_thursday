@@ -12,7 +12,6 @@ class InvoiceItemRepository
     @repository = []
     @class = InvoiceItem
     get_stuff(path, @class)
-
   end
 
   def create(hash)
